@@ -44,9 +44,28 @@
                 </mat-card-header>
                 <img mat-card-image src="{{recipe.imageUrl}}">
                 <mat-card-content>
-                    <p>
-                        {{recipe.howToMake}}
-                    </p>
+                    <div class="container-fluid p-0">
+                        <div class="row p-0">
+                            <div class="col-sm-12">
+                                <b>Malzemeler</b>
+                            </div>
+                        </div>
+                        <div *ngFor="let material of recipe.materialList" class="row p-0">
+                            <div class="col-sm-12">
+                                {{material.quantity ? material.quantity + ' ' + material.materialName : material.materialName}}
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-sm-12">
+                                <b>Yapılışı</b>
+                            </div>
+                        </div>
+                        <div class="row p-0">
+                            <div class="col-sm-12">
+                                {{recipe.howToMake}}
+                            </div>
+                        </div>
+                    </div> 
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-button>LIKE</button>
