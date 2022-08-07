@@ -1,7 +1,53 @@
-<div class="container-fluid p-0">
+<div *ngIf="lastActiveTab === 'recipes'" class="container-fluid p-0">
     <div class="row p-2">
         <div class="col-12">
-            Hwww
+            <button mat-button color="primary" (click)="goBackToCategories()">{{'\< Kategoriler'}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="lastActiveTab === 'categories' && categories" class="container-fluid p-0">
+    <div *ngFor="let category of categories" class="row p-2" (click)="getRecipes(category.id)">
+        <div class="col-12">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>{{category.name}}</mat-card-title>
+                  <mat-card-subtitle>{{category.description}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{category.imageUrl}}">
+                <mat-card-content>
+                  <p>
+                    {{category.name}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="lastActiveTab === 'recipes' && recipes" class="container-fluid p-0">
+    <div *ngFor="let recipe of recipes" class="row p-2">
+        <div class="col-12">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>{{recipe.name}}</mat-card-title>
+                  <mat-card-subtitle>{{recipe.description}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{recipe.imageUrl}}">
+                <mat-card-content>
+                  <p>
+                    {{recipe.howToMake}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
         </div>
     </div>
 </div>

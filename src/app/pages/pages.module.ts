@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     HttpClientModule,
     MatButtonModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCardModule
   ]
 })
 export class PagesModule { }
