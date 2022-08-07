@@ -11,20 +11,25 @@
         <div class="col-12">
             <mat-card class="example-card">
                 <mat-card-header>
-                  <mat-card-title>{{category.name}}</mat-card-title>
-                  <mat-card-subtitle>{{category.description}}</mat-card-subtitle>
+                    <mat-card-title>{{category.name}}</mat-card-title>
+                    <mat-card-subtitle>{{category.description}}</mat-card-subtitle>
                 </mat-card-header>
                 <img mat-card-image src="{{category.imageUrl}}">
                 <mat-card-content>
-                  <p>
-                    {{category.name}}
-                  </p>
+                    <p>
+                        {{category.name}}
+                    </p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button>LIKE</button>
-                  <button mat-button>SHARE</button>
+                    <button mat-icon-button class="example-icon favorite-icon"
+                        aria-label="Example icon-button with heart icon">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                        <mat-icon>share</mat-icon>
+                    </button>
                 </mat-card-actions>
-              </mat-card>
+            </mat-card>
         </div>
     </div>
 </div>
@@ -34,20 +39,20 @@
         <div class="col-12">
             <mat-card class="example-card">
                 <mat-card-header>
-                  <mat-card-title>{{recipe.name}}</mat-card-title>
-                  <mat-card-subtitle>{{recipe.description}}</mat-card-subtitle>
+                    <mat-card-title>{{recipe.name}}</mat-card-title>
+                    <mat-card-subtitle>{{recipe.description}}</mat-card-subtitle>
                 </mat-card-header>
                 <img mat-card-image src="{{recipe.imageUrl}}">
                 <mat-card-content>
-                  <p>
-                    {{recipe.howToMake}}
-                  </p>
+                    <p>
+                        {{recipe.howToMake}}
+                    </p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button>LIKE</button>
-                  <button mat-button>SHARE</button>
+                    <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button>
                 </mat-card-actions>
-              </mat-card>
+            </mat-card>
         </div>
     </div>
 </div>
