@@ -1,0 +1,42 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { PagesRoutingModule } from './pages-routing.module';
+import { HomeComponent } from './home/home.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import { AddMaterialComponent } from './add-material/add-material.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+@NgModule({
+  declarations: [
+    HomeComponent,
+    AddMaterialComponent,
+    AddRecipeComponent
+  ],
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    MatGridListModule,
+    MatDividerModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatIconModule,
+    FormsModule,
+    MatInputModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatAutocompleteModule
+  ]
+})
+export class PagesModule { }
