@@ -17,12 +17,15 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCardModule} from '@angular/material/card';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     AddMaterialComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    AddCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +41,8 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatCardModule
+    MatCardModule,
+    NgSelectModule
   ]
 })
 export class PagesModule { }
