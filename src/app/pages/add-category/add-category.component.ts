@@ -12,6 +12,7 @@ export class AddCategoryComponent implements OnInit {
   categoryName:string = "";
   description:string = "";
   imageUrl:string = "";
+  order:string = "";
 
   constructor(private http:HttpClient) { }
 
@@ -26,6 +27,7 @@ export class AddCategoryComponent implements OnInit {
       "name":this.categoryName, 
       "description":this.description,
       "imageUrl":this.imageUrl,
+      "orderVal":+this.order,
       "createdDate":todayStr
     };
     this.http.post(url, queryParams).subscribe({
