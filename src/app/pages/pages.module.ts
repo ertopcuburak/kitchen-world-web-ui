@@ -19,6 +19,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCardModule} from '@angular/material/card';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     MatChipsModule,
     MatAutocompleteModule,
     MatCardModule,
-    NgSelectModule
+    NgSelectModule,
+    AngularEditorModule
   ]
 })
 export class PagesModule { }
