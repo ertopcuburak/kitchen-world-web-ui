@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
@@ -12,7 +13,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 export class SignupComponent implements OnInit {
   userData: any = {};
   isAdmin = 0;
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +46,7 @@ export class SignupComponent implements OnInit {
   addSuccess() {
     console.log("::KAYDETTİ::");
     Swal.fire('Başarılı', 'Başarıyla üye oldunuz, artık giriş yapabilirsiniz.', 'success');
+    this.router.navigateByUrl('/pages/login');
   }
 
   addError() {
