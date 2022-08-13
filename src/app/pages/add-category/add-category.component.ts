@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
 
@@ -14,7 +15,7 @@ export class AddCategoryComponent implements OnInit {
   imageUrl:string = "";
   order:string = "";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpService) { }
 
   ngOnInit(): void {
   }

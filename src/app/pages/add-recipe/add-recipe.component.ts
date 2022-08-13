@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Observable } from 'rxjs';
+import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
 
@@ -64,7 +65,7 @@ export class AddRecipeComponent implements OnInit {
     uploadUrl: 'assets/image',
   };
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpService) { }
 
   ngOnInit(): void {
     this.getCategories();

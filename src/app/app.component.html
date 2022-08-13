@@ -1,10 +1,10 @@
 <mat-drawer-container class="example-container" autosize>
-  <mat-toolbar>
+  <mat-toolbar *ngIf="loggedinUser">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Kitchen World</span>
+    <span>Kitchen World, Hoşgeldin {{loggedinUser['firstName'] + ' ' + loggedinUser['lastName']}}</span>
     <span class="example-spacer"></span>
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>favorite</mat-icon>
@@ -13,43 +13,49 @@
       <mat-icon>share</mat-icon>
     </button>
   </mat-toolbar>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <div class="container-fluid">
-      <div class="row p-0 mt-4">
-        <div class="col-3 p-0">
-          <div class="container-fluid">
-            <div class="row p-0">
-              <div class="col-12 p-0">
-                <button mat-button color="primary" [routerLink]="['/home']" routerLinkActive="mat-accent">Ana Sayfa</button>
+    <mat-drawer #drawer class="example-sidenav" mode="side" [hidden]="!loggedinUser">
+      <div *ngIf="loggedinUser" class="container-fluid">
+        <div class="row p-0 mt-4">
+          <div class="col-3 p-0">
+            <div class="container-fluid">
+              <div class="row p-0">
+                <div class="col-12 p-0">
+                  <button mat-button color="primary" [routerLink]="['/home']" routerLinkActive="mat-accent">Ana Sayfa</button>
+                </div>
+              </div>
+              <div *ngIf="loggedinUser && loggedinUser.type === 1" class="row p-0">
+                <div class="col-12 p-0">
+                  <button mat-button color="primary" [routerLink]="['/pages/add-recipe']" routerLinkActive="mat-accent">Tarif Ekle</button>
+                </div>
+              </div>
+              <div *ngIf="loggedinUser && loggedinUser.type === 1"  class="row p-0">
+                <div class="col-12 p-0">
+                  <button mat-button color="primary" [routerLink]="['/pages/add-category']" routerLinkActive="mat-accent">Kategori Ekle</button>
+                </div>
+              </div>
+              <div *ngIf="loggedinUser && loggedinUser.type === 1"  class="row p-0">
+                <div class="col-12 p-0">
+                  <button mat-button color="primary" [routerLink]="['/pages/add-material']" routerLinkActive="mat-accent">Malzeme Ekle</button>
+                </div>
+              </div>
+              <div class="row p-0">
+                <div class="col-12 p-0">
+                  <button mat-button color="primary" (click)="logOut()">Çıkış Yap</button>
+                </div>
               </div>
             </div>
-            <div class="row p-0">
-              <div class="col-12 p-0">
-                <button mat-button color="primary" [routerLink]="['/pages/add-recipe']" routerLinkActive="mat-accent">Tarif Ekle</button>
-              </div>
+            <div class="col-9 p-0">
+  
             </div>
-            <div class="row p-0">
-              <div class="col-12 p-0">
-                <button mat-button color="primary" [routerLink]="['/pages/add-category']" routerLinkActive="mat-accent">Kategori Ekle</button>
-              </div>
-            </div>
-            <div class="row p-0">
-              <div class="col-12 p-0">
-                <button mat-button color="primary" [routerLink]="['/pages/add-material']" routerLinkActive="mat-accent">Malzeme Ekle</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-9 p-0">
-
           </div>
         </div>
       </div>
-    </div>
-    <!-- <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button> -->
-  </mat-drawer>
+      <!-- <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        Toggle extra text
+      </button> -->
+    </mat-drawer>
+  
 
   <div class="example-sidenav-content">
     <router-outlet></router-outlet>

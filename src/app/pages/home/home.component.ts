@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 
 @Component({
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   lastActiveTab = "categories";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpService) { }
 
   ngOnInit(): void {
     this.getCategories();

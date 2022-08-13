@@ -9,7 +9,7 @@ import {MatListModule} from '@angular/material/list';
 import { AddMaterialComponent } from './add-material/add-material.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,13 +20,16 @@ import {MatCardModule} from '@angular/material/card';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { LoginComponent } from './login/login.component';
+import { HttpService } from '../services/http-service.service';
 
 @NgModule({
   declarations: [
     HomeComponent,
     AddMaterialComponent,
     AddRecipeComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +47,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatAutocompleteModule,
     MatCardModule,
     NgSelectModule,
-    AngularEditorModule
-  ]
+    AngularEditorModule,
+    ReactiveFormsModule
+  ],
+  providers:[HttpService]
 })
 export class PagesModule { }
