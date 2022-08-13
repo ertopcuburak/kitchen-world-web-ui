@@ -19,19 +19,20 @@ export class LoginComponent implements OnInit {
   });
 
   error:any;
+  userData:any = {};
 
   constructor(private http:HttpClient, private router:Router) { }
 
   ngOnInit(): void {
   }
 
-  submit() {
-    if (this.form.valid) {
+  submit(data:any) {
+    if (data && data.identifier && data.password) {
       const url = Environment.apiUrl + '/users/login';
       const md5 = new Md5();
       const queryParams = {
-        "identifier": this.form.controls['identifier'].value,
-        "pwd": md5.appendStr(this.form.controls['password'].value).end()
+        "identifier": data.identifier,
+        "pwd": md5.appendStr(data.password).end()
       };
       this.http.post(url, queryParams).subscribe({
         next: this.loginSuccess.bind(this),

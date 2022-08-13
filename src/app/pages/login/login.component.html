@@ -1,27 +1,33 @@
-<mat-card>
-    <mat-card-title>Giriş Yap</mat-card-title>
-<mat-card-content>
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <p>
-    <mat-form-field>
-      <input type="text" matInput placeholder="Kullanıcı adı/Email" formControlName="identifier">
-    </mat-form-field>
-  </p>
+<div class="container-fluid p-0 signup-cont">
+  <div class="row">
+      <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+          <div class="card auth">
+              <div class="card-body auth-card">
+                  <div class="auth-avatar">
+                      <img src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png"
+                          alt="user" class="user-image">
+                  </div>
+                  <form (submit)="submit(userData)">
+                      <div class="form-group">
+                          <label for="identifier">Kullanıcı adı/Email : </label>
+                          <input type="text" name="identifier" class="form-control" placeholder="Kullanıcı adı/Email"
+                              [(ngModel)]="userData.identifier">
+                      </div>
+                      <div class="form-group">
+                          <label for="password">Şifre : </label>
+                          <input type="password" name="password" class="form-control" placeholder="********"
+                              [(ngModel)]="userData.password">
+                      </div>
+                      <div class="text-center">
+                          <input type="submit" class="btn btn-my" value="Giriş">
+                      </div>
+                      <div class="text-center login">
+                          Üye değil misin ? <a routerLink="/pages/signup">Üye</a> ol.
+                      </div>
 
-  <p>
-    <mat-form-field>
-      <input type="password" matInput placeholder="Şifre" formControlName="password">
-    </mat-form-field>
-  </p>
-
-  <div class="button">
-    <button type="submit" mat-button>Giriş</button>
+                  </form>
+              </div>
+          </div>
+      </div>
   </div>
-
-  <div class="button">
-    <a (click)="goToSignUp()">Üye değil misin? - Üye Ol</a>
-  </div>
-
-</form>
-</mat-card-content>
-</mat-card>
+</div>
