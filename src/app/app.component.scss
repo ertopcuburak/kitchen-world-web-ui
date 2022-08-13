@@ -9,7 +9,7 @@
     height: 100%;
     padding-left: 1rem;
     //align-items: center;
-    //justify-content: center;
+    justify-content: center;
 }
 
 .example-sidenav {
@@ -18,4 +18,13 @@
 
 .example-spacer {
     flex: 1 1 auto;
+}
+
+.msn-container{
+    background-color: brown;
+    height: inherit;
+}
+
+::ng-deep .mat-drawer-content {
+    background-color: brown;
 }

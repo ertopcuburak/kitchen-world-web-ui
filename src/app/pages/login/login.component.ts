@@ -57,4 +57,8 @@ export class LoginComponent implements OnInit {
     Swal.fire('Hata','Giriş bilgileriniz hatalı!', 'error');
   }
 
+  goToSignUp() {
+    this.router.navigateByUrl('/pages/signup');
+  }
+
 }
