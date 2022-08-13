@@ -12,6 +12,13 @@
     justify-content: center;
 }
 
+@media screen and (min-width: 1000px) {
+    ::ng-deep .mat-drawer-content {
+        background-color: brown;
+        display: grid !important;
+    }
+}
+
 .example-sidenav {
     padding: 20px;
 }
@@ -20,7 +27,7 @@
     flex: 1 1 auto;
 }
 
-.msn-container{
+.msn-container {
     background-color: brown;
     height: inherit;
 }
