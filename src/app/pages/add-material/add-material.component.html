@@ -1,3 +1,35 @@
+<div class="container-fluid p-0 addcat-cont">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <div class="card auth">
+                <div class="card-body auth-card">
+                    <div class="auth-avatar">
+                        <img src="https://cdn1.iconfinder.com/data/icons/rounded-set-6/48/view-details-512.png"
+                            alt="user" class="user-image">
+                    </div>
+                    <form (submit)="addMaterial(materialData)">
+                        <div class="form-group">
+                            <label for="catName">Malzeme Adı : </label>
+                            <input type="text" name="catName" class="form-control" placeholder="Malzeme adı"
+                                [(ngModel)]="materialData.materialName">
+                        </div>
+                        <div class="form-group">
+                            <label for="catDesc">Açıklama : </label>
+                            <input type="text" name="catDesc" class="form-control" placeholder="Açıklama"
+                                [(ngModel)]="materialData.description">
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-my" value="Kaydet">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
 <div class="container-fluid p-0">
     <div class="row p-2">
         <div class="col-12">
@@ -24,3 +56,4 @@
         </div>
     </div>
 </div>
+-->

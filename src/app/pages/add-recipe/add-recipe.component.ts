@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-recipe.component.scss']
 })
 export class AddRecipeComponent implements OnInit {
+  recipeData:any = {};
   recipeName:string = "";
   description:string = "";
   imageUrl:string = "";
@@ -143,18 +144,24 @@ export class AddRecipeComponent implements OnInit {
     return filtered;
   }
 
-  addMaterial() {
+  addToMaterialList() {
     this.materialList.push({});
   }
 
-  addRecipe() {
+  saveRecipe(data:any) {
     const url = Environment.apiUrl+'/recipes/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
     const queryParams = {
-      "name":this.recipeName, 
-      "description":this.description, 
-      "createdDate":todayStr
+      "name":data.name, 
+      "description":data.desc,
+      "howToMake":this.howToMake,
+      "userId":1,
+      "materialList":this.materialList,
+      "categoryId":this.categoryId,
+      "imageUrl":data.imgUrl,
+      "createdDate":todayStr,
+      "updatedDate":null
     };
     this.http.post(url, queryParams).subscribe({
       next: this.addSuccess.bind(this),
@@ -169,27 +176,6 @@ export class AddRecipeComponent implements OnInit {
 
   addError() {
     Swal.fire('Hata', 'Bir hata oluştu!', 'error');
-  }
-
-  saveRecipe() {
-    const url = Environment.apiUrl+'/recipes/';
-    const todayStr = new Date().toISOString();
-    //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
-    const queryParams = {
-      "name":this.recipeName, 
-      "description":this.description,
-      "howToMake":this.howToMake,
-      "userId":1,
-      "materialList":this.materialList,
-      "categoryId":this.categoryId,
-      "imageUrl":this.imageUrl,
-      "createdDate":todayStr,
-      "updatedDate":null
-    };
-    this.http.post(url, queryParams).subscribe({
-      next: this.addSuccess.bind(this),
-      error: this.addError.bind(this)
-    });
   }
 
 }

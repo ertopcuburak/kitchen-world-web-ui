@@ -34,4 +34,7 @@
 
 ::ng-deep .mat-drawer-content {
     background-color: brown;
+    background-image: url("./images/kitchen.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }

@@ -1,3 +1,78 @@
+<div class="container-fluid p-0 addcat-cont">
+    <div *ngIf="recipeData.imgUrl" class="row">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <img class="preview-img" [src]="recipeData.imgUrl" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <div class="card auth">
+                <div class="card-body auth-card">
+                    <div class="auth-avatar">
+                        <img src="https://cdn0.iconfinder.com/data/icons/food-icons-rounded/110/Fork-Spoon-512.png"
+                            alt="user" class="user-image">
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Tarif Adı : </label>
+                            <input type="text" name="name" class="form-control" placeholder="Tarif adı"
+                                [(ngModel)]="recipeData.name">
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Açıklama : </label>
+                            <input type="text" name="desc" class="form-control" placeholder="Açıklama"
+                                [(ngModel)]="recipeData.desc">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Kategori : </label>
+                            <ng-select [items]="categoryOptions" [(ngModel)]="selectedCategory" (change)="categorySelected()" bindLabel="name"
+                                placeholder="Kategori" name="category" class="form-control">
+                            </ng-select>
+                        </div>
+                        <div class="form-group">
+                            <label for="imgUrl">Resim Linki : </label>
+                            <input type="text" name="imgUrl" class="form-control" placeholder="Resim Linki"
+                                [(ngModel)]="recipeData.imgUrl">
+                        </div>
+                        <div class="form-group">
+                            <label for="howToMake">Yapılışı : </label>
+                            <angular-editor [(ngModel)]="howToMake" [config]="editorConfig" name="howToMake" class="form-control"></angular-editor>
+                        </div>
+                        <div class="form-group">
+                            <label for="materials">Malzemeler : </label>
+                            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" name="materials" (click)="addToMaterialList()">
+                                <mat-icon>plus_one</mat-icon>
+                            </button>
+                        </div>
+                        <div class="form-group" *ngFor="let material of materialList; let i = index;">
+                            <label for="{{'material'+(i+1)}}">{{'Malzeme'+(i+1)}} : </label>
+                            <ng-select 
+                                    [items]="materialOptions" 
+                                    [(ngModel)]="selectedMaterials[i]"
+                                    bindLabel="name"
+                                    placeholder="malzeme"
+                                    name="{{'material'+(i+1)}}"
+                                    class="form-control"
+                                    (change)="materialSelected(i)"
+                                    (clear)="removeSelecteMaterial(i)"
+                                    >
+                                </ng-select>
+                                <input placeholder="Miktar" class="form-control mater-quantity" (change)="setMaterialQuantity(i, $event)">
+                        </div>
+
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-my" value="Kaydet" (click)="saveRecipe(recipeData)">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
 <div class="container-fluid p-0">
     <div class="row p-2">
         <div class="col-12">
@@ -86,3 +161,4 @@
         </div>
     </div>
 </div>
+-->
