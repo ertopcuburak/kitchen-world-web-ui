@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit {
   goBackToCategories() {
     this.lastActiveTab = "categories";
     this.recipes = undefined;
+    this.searchText = '';
   }
 
   searchRecipes(name:string) {
