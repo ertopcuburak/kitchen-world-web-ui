@@ -32,5 +32,4 @@ export class HttpService {
     };
     return this.http.get(url, httpOptions);
   }
-
 }

@@ -65,8 +65,11 @@ export class HomeComponent implements OnInit {
   searchRecipes(name:string) {
     if(!name || name.length < 3)
       return;
-    const url = Environment.apiUrl + '/recipes/searchByName/'+name;
-    this.http.get(url).subscribe({
+    const url = Environment.apiUrl + '/recipes/searchByName';
+    const queryParams = {
+      "searchText":name
+    };
+    this.http.post(url, queryParams).subscribe({
       next: this.searchRecipesSuccess.bind(this),
       error: this.searchRecipesError.bind(this)
     });
