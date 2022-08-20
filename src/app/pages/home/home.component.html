@@ -1,3 +1,15 @@
+<div class="container-fluid p-0">
+    <div class="row p-2">
+        <div class="col-9">
+            <div class="input-icons">
+                <input type="search" class="input-field form-control" placeholder="Tarif ismiyle ara..." [(ngModel)]="searchText" (keyup.enter)="searchRecipes(searchText)"/>
+            </div>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-my mt-0" color="primary" (click)="searchRecipes(searchText)">{{'Ara'}}</button>
+        </div>
+    </div>
+</div>
 <div *ngIf="lastActiveTab === 'recipes'" class="container-fluid p-0">
     <div class="row p-2">
         <div class="col-12">
@@ -34,7 +46,7 @@
     </div>
 </div>
 
-<div *ngIf="lastActiveTab === 'recipes' && recipes" class="container-fluid p-0">
+<div *ngIf="lastActiveTab === 'recipes' && recipes && recipes.length > 0" class="container-fluid p-0">
     <div *ngFor="let recipe of recipes" class="row p-2">
         <div class="col-12">
             <mat-card class="food-card">
@@ -76,6 +88,18 @@
                         <mat-icon>share</mat-icon>
                     </button>
                 </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="lastActiveTab === 'recipes' && (!recipes || recipes.length === 0)" class="container-fluid p-0">
+    <div class="row p-2">
+        <div class="col-12">
+            <mat-card class="food-card">
+                <mat-card-content>
+                    <i>Üzgünüz, aradığınız tarif bulunamadı.</i>
+                </mat-card-content>
             </mat-card>
         </div>
     </div>

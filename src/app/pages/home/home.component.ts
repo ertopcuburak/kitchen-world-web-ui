@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   recipes:any[] | undefined;
 
   lastActiveTab = "categories";
+  searchText:string = "";
 
   constructor(private http:HttpService) { }
 
@@ -58,6 +59,25 @@ export class HomeComponent implements OnInit {
   goBackToCategories() {
     this.lastActiveTab = "categories";
     this.recipes = undefined;
+  }
+
+  searchRecipes(name:string) {
+    if(!name || name.length < 3)
+      return;
+    const url = Environment.apiUrl + '/recipes/searchByName/'+name;
+    this.http.get(url).subscribe({
+      next: this.searchRecipesSuccess.bind(this),
+      error: this.searchRecipesError.bind(this)
+    });
+  }
+
+  searchRecipesSuccess(data:any) {
+    this.lastActiveTab = "recipes";
+    this.recipes = data;
+  }
+
+  searchRecipesError() {
+
   }
 
 }
