@@ -20,10 +20,19 @@ export class AddMaterialComponent implements OnInit {
   }
 
   addMaterial(data:any) {
+    console.log("::data::", data);
+    if(!data.materialName || !data.description || !data.isBanned) {
+      Swal.fire("Hata!", "Lütfen tüm alanları doldurun!", "error");
+      return;
+    }
     const url = Environment.apiUrl+'/materials/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
-    const queryParams = {"name":data.materialName, "description":data.description, "createdDate":todayStr};
+    const queryParams = {
+      "name":data.materialName, 
+      "description":data.description,
+      "isBanned": +data.isBanned,
+      "createdDate":todayStr};
     this.http.post(url, queryParams).subscribe({
       next: this.addSuccess.bind(this),
       error: this.addError.bind(this)

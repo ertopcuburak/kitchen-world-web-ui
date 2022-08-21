@@ -84,4 +84,13 @@ export class HomeComponent implements OnInit {
 
   }
 
+  searchEcommerce(keyword:string, ecommerceBrand:string){
+    if(ecommerceBrand === 'migros') {
+      window.open(Environment.migrosSearchUrl+keyword, '_blank');
+    } else if(ecommerceBrand === 'trendyol') {
+      window.open(Environment.trendyolSearchUrl+keyword, '_blank');
+    }
+    
+  }
+
 }

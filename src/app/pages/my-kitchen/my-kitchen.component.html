@@ -66,7 +66,10 @@
                         <div *ngFor="let material of recipe.materialList" class="row p-1">
                             <div class="col-sm-12">
                                 {{isSelectedMat(material)}}
-                                <ng-container *ngIf="!material.selected">
+                                <button *ngIf="material.isBanned" mat-icon-button class="btn btn-my-danger mt-0">
+                                    <i class="fa fa-ban"></i>
+                                </button>
+                                <ng-container *ngIf="!material.isBanned && !material.selected">
                                     <button mat-icon-button class="btn btn-my mt-0" [matMenuTriggerFor]="menu">
                                         <i class="fa fa-cart-plus"></i>
                                     </button>
@@ -82,7 +85,7 @@
                                         <i class="fa fa-cart-plus"></i>
                                     </button> -->
                                 </ng-container>
-                                <ng-container *ngIf="material.selected">
+                                <ng-container *ngIf="!material.isBanned && material.selected">
                                     <button mat-icon-button class="btn btn-my-danger mt-0" [matMenuTriggerFor]="menu">
                                         <i class="fa fa-cart-plus"></i>
                                     </button>

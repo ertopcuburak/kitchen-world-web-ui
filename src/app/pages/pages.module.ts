@@ -25,6 +25,7 @@ import { HttpService } from '../services/http-service.service';
 import { SignupComponent } from './signup/signup.component';
 import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {MatMenuModule} from '@angular/material/menu';
     NgSelectModule,
     AngularEditorModule,
     ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatRadioModule
   ],
   providers:[HttpService]
 })
