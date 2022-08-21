@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpService } from '../services/http-service.service';
 import { SignupComponent } from './signup/signup.component';
 import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
     MatCardModule,
     NgSelectModule,
     AngularEditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule
   ],
   providers:[HttpService]
 })

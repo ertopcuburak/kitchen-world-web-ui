@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators'
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-kitchen',
@@ -120,6 +122,31 @@ export class MyKitchenComponent implements OnInit {
   isSelectedMat(material:any) {
     console.log("::isSelectedMat::", material.materialName, this.selectedMaterials.indexOf(material.materialId) !== -1);
     material['selected'] = this.selectedMaterials.indexOf(material.materialId) !== -1 ? true : false;
+  }
+
+  searchEcommerce(keyword:string, ecommerceBrand:string){
+    /* const url = Environment.getirSearchApi;
+    const queryParams = {
+      "keyword":keyword
+    };
+    this.http.post(url, queryParams).subscribe({
+      next: this.searchEcommerceSuccess.bind(this),
+      error: this.searchEcommerceError.bind(this)
+    }); */
+    if(ecommerceBrand === 'migros') {
+      window.open(Environment.migrosSearchUrl+keyword, '_blank');
+    } else if(ecommerceBrand === 'trendyol') {
+      window.open(Environment.trendyolSearchUrl+keyword, '_blank');
+    }
+    
+  }
+
+  searchEcommerceSuccess(data:any) {
+    console.log("::getirData::", data);
+  }
+
+  searchEcommerceError(error:any){
+    Swal.fire("Hata!",error,"error");
   }
 
 }
