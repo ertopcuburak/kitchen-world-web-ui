@@ -19,6 +19,10 @@ export class AddCategoryComponent implements OnInit {
   }
 
   addCategory(data:any) {
+    if(!data.catName || !data.catDesc || !data.imgUrl || !data.catOrder) {
+      Swal.fire("Hata!", "Lütfen tüm alanları doldurun!", "error");
+      return;
+    }
     const url = Environment.apiUrl+'/categories/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
