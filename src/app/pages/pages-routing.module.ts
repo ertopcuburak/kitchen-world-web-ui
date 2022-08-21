@@ -5,6 +5,7 @@ import { AddMaterialComponent } from './add-material/add-material.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'add-material', component: AddMaterialComponent },
   { path: 'add-recipe', component: AddRecipeComponent },
-  { path: 'add-category', component: AddCategoryComponent }
+  { path: 'add-category', component: AddCategoryComponent },
+  { path: 'my-kitchen', component: MyKitchenComponent }
 ];
 
 @NgModule({

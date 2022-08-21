@@ -1,0 +1,109 @@
+<div class="container-fluid p-0 addcat-cont">
+    <div class="row p-2">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <div class="card auth">
+                <div class="card-body auth-card">
+                    <div class="auth-avatar">
+                        <img src="https://cdn0.iconfinder.com/data/icons/food-icons-rounded/110/Fork-Spoon-512.png"
+                            alt="user" class="user-image">
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="materials">Mutfağımdaki Malzemeler : </label>
+                            <mat-form-field class="example-chip-list form-control" appearance="fill">
+                                <mat-label>Malzemeler</mat-label>
+                                <mat-chip-list #chipList aria-label="Material selection">
+                                  <mat-chip
+                                    *ngFor="let material of selectedMaterials"
+                                    (removed)="remove(material)">
+                                    {{showMaterialNameById(material)}}
+                                    <button matChipRemove>
+                                      <mat-icon>cancel</mat-icon>
+                                    </button>
+                                  </mat-chip>
+                                  <input
+                                    placeholder="Yeni malzeme..."
+                                    #materialInput
+                                    [formControl]="matsCtrl"
+                                    [matAutocomplete]="auto"
+                                    [matChipInputFor]="chipList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                  <mat-option *ngFor="let material of filteredMaterials | async" [value]="material.id">
+                                    {{material.name}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                        </div>
+                    
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-my" value="Ne Yapabilirim?" (click)="searchByMaterials(selectedMaterials)">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let recipe of recipes" class="row p-2">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <mat-card class="food-card">
+                <mat-card-header>
+                    <mat-card-title>{{recipe.name}}</mat-card-title>
+                    <mat-card-subtitle>{{recipe.description}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{recipe.imageUrl}}">
+                <mat-card-content>
+                    <div class="container-fluid p-0">
+                        <div class="row p-0">
+                            <div class="col-sm-12">
+                                <b>Malzemeler</b>
+                            </div>
+                        </div>
+                        <div *ngFor="let material of recipe.materialList" class="row p-1">
+                            <div class="col-sm-12">
+                                {{isSelectedMat(material)}}
+                                <ng-container *ngIf="!material.selected">
+                                    <button class="btn btn-my mt-0"> 
+                                        <i class="fa fa-cart-plus"></i>
+                                    </button>
+                                </ng-container>
+                                <ng-container *ngIf="material.selected">
+                                    <button class="btn btn-my-danger mt-0"> 
+                                        <i class="fa fa-cart-plus"></i>
+                                    </button>
+                                </ng-container>
+                                {{material.quantity ? material.quantity + ' ' + material.materialName : material.materialName}}
+                                <ng-container *ngIf="material.selected">
+                                    *(Mutfağında var)
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-sm-12">
+                                <b>Yapılışı</b>
+                            </div>
+                        </div>
+                        <div class="row p-0">
+                            <div class="col-sm-12" [innerHTML]="recipe.howToMake">
+                                
+                            </div>
+                        </div>
+                    </div> 
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-icon-button class="example-icon favorite-icon"
+                        aria-label="Example icon-button with heart icon">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                        <mat-icon>share</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

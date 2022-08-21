@@ -23,6 +23,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { LoginComponent } from './login/login.component';
 import { HttpService } from '../services/http-service.service';
 import { SignupComponent } from './signup/signup.component';
+import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SignupComponent } from './signup/signup.component';
     AddRecipeComponent,
     AddCategoryComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    MyKitchenComponent
   ],
   imports: [
     CommonModule,
