@@ -26,6 +26,7 @@ import { SignupComponent } from './signup/signup.component';
 import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
+import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatRadioModule} from '@angular/material/radio';
     AddCategoryComponent,
     LoginComponent,
     SignupComponent,
-    MyKitchenComponent
+    MyKitchenComponent,
+    MyFavoritesComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,77 @@
+<div class="container-fluid p-0">
+    <div *ngIf="!recipes || recipes.length === 0" class="row p-2">
+        <div class="col-12">
+            <mat-card class="food-card">
+                <mat-card-content>
+                    <i>Henüz favorilerinize eklenmiş bir tarif bulunamadı.</i>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div *ngFor="let recipe of recipes" class="row p-2">
+        <div class="col-12">
+            <mat-card class="food-card">
+                <mat-card-header>
+                    <mat-card-title>{{recipe.name}}</mat-card-title>
+                    <mat-card-subtitle>{{recipe.description}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{recipe.imageUrl}}">
+                <mat-card-content>
+                    <div class="container-fluid p-0">
+                        <div class="row p-0">
+                            <div class="col-sm-12">
+                                <b>Malzemeler</b>
+                            </div>
+                        </div>
+                        <div *ngFor="let material of recipe.materialList" class="row p-1">
+                            <div class="col-sm-12">
+                                <button *ngIf="material.isBanned" mat-icon-button class="btn btn-my-danger mt-0">
+                                    <i class="fa fa-ban"></i>
+                                </button>
+                                <ng-container *ngIf="!material.isBanned">
+                                    <button mat-icon-button class="btn btn-my mt-0" [matMenuTriggerFor]="menu">
+                                        <i class="fa fa-cart-plus"></i>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item
+                                            (click)="searchEcommerce(material.materialName, 'migros')">
+                                            <span>Migros</span>
+                                        </button>
+                                        <button mat-menu-item
+                                            (click)="searchEcommerce(material.materialName, 'trendyol')">
+                                            <span>Trendyol</span>
+                                        </button>
+                                    </mat-menu>
+                                    <!-- <button class="btn btn-my-danger mt-0" (click)="searchEcommerce(material.materialName)"> 
+                                        <i class="fa fa-cart-plus"></i>
+                                    </button> -->
+                                </ng-container>
+                                {{material.quantity ? material.quantity + ' ' + material.materialName :
+                                material.materialName}}
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-sm-12">
+                                <b>Yapılışı</b>
+                            </div>
+                        </div>
+                        <div class="row p-0">
+                            <div class="col-sm-12" [innerHTML]="recipe.howToMake">
+
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <!-- <button mat-icon-button class="example-icon favorite-icon"
+                        aria-label="Example icon-button with heart icon">
+                        <mat-icon>favorite</mat-icon>
+                    </button> -->
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                        <mat-icon>share</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

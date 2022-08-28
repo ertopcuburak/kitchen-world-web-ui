@@ -28,6 +28,11 @@
                   <button mat-button color="primary" [routerLink]="['/pages/my-kitchen']" routerLinkActive="mat-accent">Benim Mutfağım</button>
                 </div>
               </div>
+              <div class="row p-0">
+                <div class="col-12 p-0">
+                  <button mat-button color="primary" [routerLink]="['/pages/my-favorites']" routerLinkActive="mat-accent">Favori Tariflerim</button>
+                </div>
+              </div>
               <div *ngIf="loggedinUser && loggedinUser.type === 1" class="row p-0">
                 <div class="col-12 p-0">
                   <button mat-button color="primary" [routerLink]="['/pages/add-recipe']" routerLinkActive="mat-accent">Tarif Ekle</button>
