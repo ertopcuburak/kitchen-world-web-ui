@@ -1,5 +1,15 @@
 <div class="container-fluid p-0">
-    <div class="row p-2">
+    <div *ngIf="lastActiveTab === 'categories'" class="row p-2">
+        <div class="col-2">
+            <div class="input-icons">
+                <input type="search" class="input-field form-control" placeholder="Tarif ismiyle ara..." [(ngModel)]="searchText" (keyup.enter)="searchRecipes(searchText)"/>
+            </div>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-my mt-0" color="primary" (click)="searchRecipes(searchText)">{{'Ara'}}</button>
+        </div>
+    </div>
+    <div *ngIf="lastActiveTab === 'recipes'" class="row p-2">
         <div class="col-9">
             <div class="input-icons">
                 <input type="search" class="input-field form-control" placeholder="Tarif ismiyle ara..." [(ngModel)]="searchText" (keyup.enter)="searchRecipes(searchText)"/>
@@ -19,14 +29,14 @@
 </div>
 
 <div *ngIf="lastActiveTab === 'categories' && categories" class="container-fluid p-0">
-    <div *ngFor="let category of categories" class="row p-2" (click)="getRecipes(category.id)">
-        <div class="col-12">
-            <mat-card class="example-card food-card">
+    <div class="row p-2">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" *ngFor="let category of categories" (click)="getRecipes(category.id)">
+            <mat-card class="example-card category-card mb-4">
                 <mat-card-header>
                     <mat-card-title>{{category.name}}</mat-card-title>
                     <mat-card-subtitle>{{category.description}}</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image src="{{category.imageUrl}}">
+                <img mat-card-image src="{{category.imageUrl}}" class="category-img">
                 <mat-card-content>
                     <p>
                         {{category.name}}

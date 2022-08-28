@@ -58,7 +58,10 @@
                                     >
                                 </ng-select>
                                 <input placeholder="Miktar" class="form-control mater-quantity" (change)="setMaterialQuantity(i, $event)">
-                        </div>
+                                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" name="materials" (click)="addToMaterialList()">
+                                    <mat-icon>plus_one</mat-icon>
+                                </button>
+                            </div>
 
                         <div class="text-center">
                             <input type="submit" class="btn btn-my" value="Kaydet" (click)="saveRecipe(recipeData)">
