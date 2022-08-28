@@ -24,6 +24,8 @@ export class MyKitchenComponent implements OnInit {
   materialOptions:any[] = [];
   selectedMaterials:number[]=[];
   filteredMaterials!: Observable<any[]>;
+  loggedinUser:any;
+  favorites:any[] = [];
   
   @ViewChild('materialInput')
   materialInput!: ElementRef<HTMLInputElement>;
@@ -36,6 +38,8 @@ export class MyKitchenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+    this.getAllFavsOfLoggedinUser();
     this.getMaterials();
   }
 
@@ -71,6 +75,15 @@ export class MyKitchenComponent implements OnInit {
 
   searchRecipesSuccess(data:any) {
     this.recipes = data;
+    if(this.recipes && this.recipes.length > 0 && this.favorites.length > 0) {
+      for(let fav of this.favorites) {
+        let list = this.recipes?.filter(recipe => recipe.id === fav.recipeId);
+        if(list && list.length > 0) {
+          let recipe = list[0];
+          recipe["isFav"] = true;
+        }
+      }
+    }
   }
 
   searchRecipesError() {
@@ -147,6 +160,28 @@ export class MyKitchenComponent implements OnInit {
 
   searchEcommerceError(error:any){
     Swal.fire("Hata!",error,"error");
+  }
+
+  getAllFavsOfLoggedinUser() {
+    if(!this.loggedinUser && !this.recipes)
+      return;
+    const todayStr = new Date().toISOString();
+    const url = Environment.apiUrl + '/favorites/getFavsByUser';
+    const queryParams = {
+      "userId":this.loggedinUser.id,
+    };
+    this.http.post(url, queryParams).subscribe({
+      next: this.getAllFavsOfLoggedinUserSuccess.bind(this),
+      error: this.getAllFavsOfLoggedinUserError.bind(this)
+    });
+  }
+
+  getAllFavsOfLoggedinUserSuccess(data:any) {
+    this.favorites = data;
+  }
+
+  getAllFavsOfLoggedinUserError() {
+    
   }
 
 }

@@ -120,7 +120,7 @@
                     </div> 
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-icon-button class="example-icon favorite-icon"
+                    <button mat-icon-button class="example-icon" [ngClass]="{'favorite-icon':recipe.isFav}"
                         aria-label="Example icon-button with heart icon">
                         <mat-icon>favorite</mat-icon>
                     </button>

@@ -10,18 +10,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  favorites:any[] = [];
   categories: any[] | undefined;
   recipes:any[] | undefined;
 
   lastActiveTab = "categories";
   searchText:string = "";
   loggedinUser:any;
+  loading:boolean = true;
+  favRecipe:any;
 
   constructor(private http:HttpService) { }
 
   ngOnInit(): void {
     this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
-    this.getCategories();
+    this.getAllFavsOfLoggedinUser();
   }
 
   getCategories() {
@@ -53,6 +56,15 @@ export class HomeComponent implements OnInit {
   getRecipesSuccess(data:any) {
     this.lastActiveTab = "recipes";
     this.recipes = data;
+    if(this.favorites.length > 0) {
+      for(let fav of this.favorites) {
+        let list = this.recipes?.filter(recipe => recipe.id === fav.recipeId);
+        if(list && list.length > 0) {
+          let recipe = list[0];
+          recipe["isFav"] = true;
+        }
+      }
+    }
   }
 
   getRecipesError() {
@@ -81,6 +93,15 @@ export class HomeComponent implements OnInit {
   searchRecipesSuccess(data:any) {
     this.lastActiveTab = "recipes";
     this.recipes = data;
+    if(this.favorites.length > 0) {
+      for(let fav of this.favorites) {
+        let list = this.recipes?.filter(recipe => recipe.id === fav.recipeId);
+        if(list && list.length > 0) {
+          let recipe = list[0];
+          recipe["isFav"] = true;
+        }
+      }
+    }
   }
 
   searchRecipesError() {
@@ -96,14 +117,15 @@ export class HomeComponent implements OnInit {
     
   }
 
-  addToFavorites(recipeId:number) {
-    if(!recipeId)
+  addToFavorites(recipe:any) {
+    if(!recipe)
       return;
+    this.favRecipe = recipe;
     const todayStr = new Date().toISOString();
     const url = Environment.apiUrl + '/favorites/';
     const queryParams = {
       "userId":this.loggedinUser.id,
-      "recipeId":recipeId,
+      "recipeId":recipe.id,
       "favDate":todayStr
     };
     this.http.post(url, queryParams).subscribe({
@@ -113,11 +135,37 @@ export class HomeComponent implements OnInit {
   }
 
   addToFavoritesSuccess(data:any) {
+    this.favRecipe["isFav"] = true;
     Swal.fire("OK", "Tarif favorilerinize eklendi!", "success");
   }
 
   addToFavoritesError() {
+    this.favRecipe = undefined;
     Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
+  }
+
+  getAllFavsOfLoggedinUser() {
+    if(!this.loggedinUser && !this.recipes)
+      return;
+    const todayStr = new Date().toISOString();
+    const url = Environment.apiUrl + '/favorites/getFavsByUser';
+    const queryParams = {
+      "userId":this.loggedinUser.id,
+    };
+    this.http.post(url, queryParams).subscribe({
+      next: this.getAllFavsOfLoggedinUserSuccess.bind(this),
+      error: this.getAllFavsOfLoggedinUserError.bind(this)
+    });
+  }
+
+  getAllFavsOfLoggedinUserSuccess(data:any) {
+    this.favorites = data;
+    this.loading = false;
+    this.getCategories();
+  }
+
+  getAllFavsOfLoggedinUserError() {
+    //Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
   }
 
 }

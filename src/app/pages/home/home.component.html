@@ -38,19 +38,8 @@
                 </mat-card-header>
                 <img mat-card-image src="{{category.imageUrl}}" class="category-img">
                 <mat-card-content>
-                    <p>
-                        {{category.name}}
-                    </p>
+                    {{''}}
                 </mat-card-content>
-                <mat-card-actions>
-                    <button mat-icon-button class="example-icon favorite-icon"
-                        aria-label="Example icon-button with heart icon">
-                        <mat-icon>favorite</mat-icon>
-                    </button>
-                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                        <mat-icon>share</mat-icon>
-                    </button>
-                </mat-card-actions>
             </mat-card>
         </div>
     </div>
@@ -104,8 +93,8 @@
                     </div> 
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-icon-button class="example-icon favorite-icon"
-                        aria-label="Example icon-button with heart icon" (click)="addToFavorites(recipe.id)">
+                    <button mat-icon-button class="example-icon" [ngClass]="{'favorite-icon':recipe.isFav}"
+                        aria-label="Example icon-button with heart icon" (click)="addToFavorites(recipe)">
                         <mat-icon>favorite</mat-icon>
                     </button>
                     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
