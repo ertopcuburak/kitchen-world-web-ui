@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
   }
 
   addToFavoritesError() {
-    Swal.fire("Hata!", "Favorilere eklenirken bir hata oluştu!", "error");
+    Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
   }
 
 }
