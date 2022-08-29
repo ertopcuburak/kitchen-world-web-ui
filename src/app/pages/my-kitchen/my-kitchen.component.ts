@@ -44,8 +44,8 @@ export class MyKitchenComponent implements OnInit {
   }
 
   getMaterials() {
-    const url = Environment.apiUrl + '/materials';
-    this.http.get(url).subscribe({
+    const url = Environment.apiUrl + '/materials/all';
+    this.http.post(url, {}).subscribe({
       next: this.getMaterialsSuccess.bind(this),
       error: this.getMaterialsError.bind(this)
     });

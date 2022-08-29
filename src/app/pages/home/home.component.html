@@ -1,16 +1,16 @@
 <div class="container-fluid p-0">
     <div *ngIf="lastActiveTab === 'categories'" class="row p-2">
-        <div class="col-2">
+        <div class="col-xl-3 col-lg-5 col-md-7 col-sm-9 col-9">
             <div class="input-icons">
                 <input type="search" class="input-field form-control" placeholder="Tarif ismiyle ara..." [(ngModel)]="searchText" (keyup.enter)="searchRecipes(searchText)"/>
             </div>
         </div>
-        <div class="col-1">
+        <div class="col-3">
             <button class="btn btn-my mt-0" color="primary" (click)="searchRecipes(searchText)">{{'Ara'}}</button>
         </div>
     </div>
     <div *ngIf="lastActiveTab === 'recipes'" class="row p-2">
-        <div class="col-9">
+        <div class="col-6">
             <div class="input-icons">
                 <input type="search" class="input-field form-control" placeholder="Tarif ismiyle ara..." [(ngModel)]="searchText" (keyup.enter)="searchRecipes(searchText)"/>
             </div>

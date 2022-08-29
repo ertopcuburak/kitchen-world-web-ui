@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
   }
 
   getCategories() {
-    const url = Environment.apiUrl + '/categories';
-    this.http.get(url).subscribe({
+    const url = Environment.apiUrl + '/categories/all';
+    this.http.post(url, {}).subscribe({
       next: this.getCategoriesSuccess.bind(this),
       error: this.getCategoriesError.bind(this)
     });
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
 
   getRecipes(categoryId:number) {
     const url = Environment.apiUrl + '/recipes/categorized/'+categoryId;
-    this.http.get(url).subscribe({
+    this.http.post(url, {}).subscribe({
       next: this.getRecipesSuccess.bind(this),
       error: this.getRecipesError.bind(this)
     });
