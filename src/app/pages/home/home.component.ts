@@ -78,9 +78,11 @@ export class HomeComponent implements OnInit {
   }
 
   goBackToCategories() {
+    this.loading = true;
     this.lastActiveTab = "categories";
     this.recipes = undefined;
     this.searchText = '';
+    this.loading = false;
     document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
   }
 
