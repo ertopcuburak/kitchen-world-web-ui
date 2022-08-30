@@ -29,7 +29,7 @@ export class AppComponent {
           this.cdr.detectChanges();
           this.router.navigateByUrl('/home');
         }
-        this.drawer.toggle();
+        if(this.drawer.opened) this.drawer.toggle();
         //console.log(event);
       }
 
