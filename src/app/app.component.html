@@ -4,14 +4,26 @@
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Mutfak Dünyası, Hoşgeldin {{loggedinUser['firstName'] + ' ' + loggedinUser['lastName']}}</span>
+    <span>Mutfak Dünyası</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      {{loggedinUser['firstName'][0] + loggedinUser['lastName'][0]}}
+      <mat-icon>person_outline</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/pages/my-kitchen']" routerLinkActive="mat-accent">
+        <mat-icon>restaurant</mat-icon>
+        <span>Benim Mutfağım</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/pages/my-favorites']" routerLinkActive="mat-accent">
+        <mat-icon>favorite_border</mat-icon>
+        <span>Favori Tariflerim</span>
+      </button>
+      <button mat-menu-item (click)="logOut()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Çıkış Yap</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
     <mat-drawer #drawer class="example-sidenav" mode="side" [hidden]="!loggedinUser">
       <div *ngIf="loggedinUser" class="container-fluid">
