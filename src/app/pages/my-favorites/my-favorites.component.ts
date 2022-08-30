@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
+import { Slugify } from 'src/app/utils/slugify';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -46,6 +47,7 @@ export class MyFavoritesComponent implements OnInit {
   }
 
   searchEcommerce(keyword:string, ecommerceBrand:string){
+    keyword = Slugify.slugifyText(keyword);
     if(ecommerceBrand === 'migros') {
       window.open(Environment.migrosSearchUrl+keyword, '_blank');
     } else if(ecommerceBrand === 'trendyol') {
