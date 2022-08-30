@@ -82,7 +82,7 @@
                                 <button *ngIf="material.isBanned" mat-icon-button class="btn btn-my-danger mt-0">
                                     <i class="fa fa-ban"></i>
                                 </button>
-                                <button *ngIf="!material.isBanned" mat-icon-button class="btn btn-my mt-0" [matMenuTriggerFor]="menu">
+                                <button *ngIf="!material.isBanned" mat-icon-button class="btn btn-my-danger mt-0" [matMenuTriggerFor]="menu">
                                     <i class="fa fa-cart-plus"></i>
                                 </button>
                                 <mat-menu #menu="matMenu">
