@@ -1,5 +1,21 @@
 <div class="container-fluid p-0">
-    <div *ngIf="lastActiveTab === 'categories'" class="row p-2">
+    <div *ngIf="loading" class="row p-2 justify-content-center align-items-center text-center">
+        <div class="col-12">
+            <mat-card class="food-card">
+                <mat-card-content>
+                    <mat-progress-spinner
+                        class="loading-ind"
+                        [color]="'accent'"
+                        [mode]="'indeterminate'"
+                        [value]="'50'">
+                    </mat-progress-spinner>
+                    <i>Yükleniyor, lütfen bekleyiniz...</i>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf="lastActiveTab === 'categories' && !loading" class="row p-2">
         <div class="col-xl-3 col-lg-5 col-md-7 col-sm-9 col-9">
             <div class="input-icons">
                 <input type="search" class="input-field form-control" placeholder="Tarif ismiyle ara..." [(ngModel)]="searchText" (keyup.enter)="searchRecipes(searchText)"/>
@@ -9,7 +25,7 @@
             <button class="btn btn-my mt-0" color="primary" (click)="searchRecipes(searchText)">{{'Ara'}}</button>
         </div>
     </div>
-    <div *ngIf="lastActiveTab === 'recipes'" class="row p-2">
+    <div *ngIf="lastActiveTab === 'recipes' && !loading" class="row p-2">
         <div class="col-6">
             <div class="input-icons">
                 <input type="search" class="input-field form-control" placeholder="Tarif ismiyle ara..." [(ngModel)]="searchText" (keyup.enter)="searchRecipes(searchText)"/>
@@ -20,7 +36,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="lastActiveTab === 'recipes'" class="container-fluid p-0">
+<div *ngIf="lastActiveTab === 'recipes' && !loading" class="container-fluid p-0">
     <div class="row p-2">
         <div class="col-12">
             <button class="btn btn-my" color="primary" (click)="goBackToCategories()">{{'\< Kategoriler'}}</button>
@@ -28,7 +44,7 @@
     </div>
 </div>
 
-<div *ngIf="lastActiveTab === 'categories' && categories" class="container-fluid p-0">
+<div *ngIf="lastActiveTab === 'categories' && categories && !loading" class="container-fluid p-0">
     <div class="row p-2">
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" *ngFor="let category of categories" (click)="getRecipes(category.id)">
             <mat-card class="example-card category-card mb-4">
@@ -45,7 +61,7 @@
     </div>
 </div>
 
-<div *ngIf="lastActiveTab === 'recipes' && recipes && recipes.length > 0" class="container-fluid p-0">
+<div *ngIf="lastActiveTab === 'recipes' && recipes && recipes.length > 0 && !loading" class="container-fluid p-0">
     <div *ngFor="let recipe of recipes" class="row p-2">
         <div class="col-12">
             <mat-card class="food-card">
@@ -106,8 +122,8 @@
     </div>
 </div>
 
-<div *ngIf="lastActiveTab === 'recipes' && (!recipes || recipes.length === 0)" class="container-fluid p-0 height-full">
-    <div class="row p-2">
+<div *ngIf="lastActiveTab === 'recipes' && (!recipes || recipes.length === 0) && !loading" class="container-fluid p-0 height-full">
+    <div class="row p-2 justify-content-center align-items-center">
         <div class="col-12">
             <mat-card class="food-card">
                 <mat-card-content>

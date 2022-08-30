@@ -1,5 +1,20 @@
 <div class="container-fluid p-0">
-    <div *ngIf="!recipes || recipes.length === 0" class="row p-2">
+    <div *ngIf="loading" class="row p-2 justify-content-center align-items-center text-center">
+        <div class="col-12">
+            <mat-card class="food-card">
+                <mat-card-content>
+                    <mat-progress-spinner
+                        class="loading-ind"
+                        [color]="'accent'"
+                        [mode]="'indeterminate'"
+                        [value]="'50'">
+                    </mat-progress-spinner>
+                    <i>Yükleniyor, lütfen bekleyiniz...</i>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div *ngIf="(!recipes || recipes.length === 0) && !loading" class="row p-2">
         <div class="col-12">
             <mat-card class="food-card">
                 <mat-card-content>

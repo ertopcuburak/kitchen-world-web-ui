@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 export class MyFavoritesComponent implements OnInit {
   recipes:any[] = [];
   loggedinUser:any;
+  loading:boolean = true;
 
   constructor(private http:HttpService) { }
 
@@ -20,6 +21,7 @@ export class MyFavoritesComponent implements OnInit {
   }
 
   getFavorites() {
+    this.loading = true;
     this.recipes = [];
     if(!this.loggedinUser)
       return;
@@ -35,9 +37,11 @@ export class MyFavoritesComponent implements OnInit {
 
   searchRecipesSuccess(data:any) {
     this.recipes = data;
+    this.loading = false;
   }
 
   searchRecipesError() {
+    this.loading = false;
     Swal.fire("Hata!", "Bir hata oluştu!", "error");
   }
 

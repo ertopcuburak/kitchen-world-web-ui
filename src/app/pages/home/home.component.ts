@@ -39,13 +39,16 @@ export class HomeComponent implements OnInit {
     this.lastActiveTab = "categories";
     //console.log("::categories::", data);
     this.categories = data;
+    this.loading = false;
   }
 
   getCategoriesError() {
-
+    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this.loading = false;
   }
 
   getRecipes(categoryId:number) {
+    this.loading = true;
     const url = Environment.apiUrl + '/recipes/categorized/'+categoryId;
     this.http.post(url, {}).subscribe({
       next: this.getRecipesSuccess.bind(this),
@@ -65,11 +68,13 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+    this.loading=false;
     document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
   }
 
   getRecipesError() {
-
+    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this.loading=false;
   }
 
   goBackToCategories() {
@@ -162,7 +167,6 @@ export class HomeComponent implements OnInit {
 
   getAllFavsOfLoggedinUserSuccess(data:any) {
     this.favorites = data;
-    this.loading = false;
     this.getCategories();
   }
 

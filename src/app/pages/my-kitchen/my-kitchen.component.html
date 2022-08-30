@@ -1,5 +1,21 @@
 <div class="container-fluid p-0 addcat-cont height-full">
-    <div class="row p-2">
+    <div *ngIf="loading" class="row p-2">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <mat-card class="food-card">
+                <mat-card-content>
+                    <mat-progress-spinner
+                        class="loading-ind"
+                        [color]="'accent'"
+                        [mode]="'indeterminate'"
+                        [value]="'50'">
+                    </mat-progress-spinner>
+                    <i>Yükleniyor, lütfen bekleyiniz...</i>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf="!loading" class="row p-2">
         <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
             <div class="card auth">
                 <div class="card-body auth-card">

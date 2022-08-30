@@ -26,6 +26,7 @@ export class MyKitchenComponent implements OnInit {
   filteredMaterials!: Observable<any[]>;
   loggedinUser:any;
   favorites:any[] = [];
+  loading:boolean = true;
   
   @ViewChild('materialInput')
   materialInput!: ElementRef<HTMLInputElement>;
@@ -44,6 +45,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   getMaterials() {
+    this.loading = true;
     const url = Environment.apiUrl + '/materials/all';
     this.http.post(url, {}).subscribe({
       next: this.getMaterialsSuccess.bind(this),
@@ -53,9 +55,12 @@ export class MyKitchenComponent implements OnInit {
 
   getMaterialsSuccess(data:any) {
     this.materialOptions = data;
+    this.loading = false;
   }
 
   getMaterialsError(error:any) {
+    this.loading = false;
+    Swal.fire("Hata!", "Bir hata oluştu!", "error");
     //console.log("::getMaterialsError - error:: ", error);
   }
 

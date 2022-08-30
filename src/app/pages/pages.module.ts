@@ -27,6 +27,7 @@ import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
     AngularEditorModule,
     ReactiveFormsModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressSpinnerModule
   ],
   providers:[HttpService]
 })
