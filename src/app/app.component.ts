@@ -31,6 +31,7 @@ export class AppComponent {
         }
         if(this.drawer.opened) this.drawer.toggle();
         //console.log(event);
+        document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
       }
 
       if (event instanceof NavigationError) {

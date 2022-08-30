@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+    document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
   }
 
   getRecipesError() {
@@ -75,6 +76,7 @@ export class HomeComponent implements OnInit {
     this.lastActiveTab = "categories";
     this.recipes = undefined;
     this.searchText = '';
+    document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
   }
 
   searchRecipes(name:string) {
