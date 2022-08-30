@@ -65,6 +65,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   searchByMaterials(materials:any[]) {
+    this.loading = true;
     this.recipes = [];
     if(!materials || materials.length === 0)
       return;
@@ -89,10 +90,12 @@ export class MyKitchenComponent implements OnInit {
         }
       }
     }
+    this.loading = false;
   }
 
   searchRecipesError() {
-
+    this.loading = false;
+    Swal.fire("Hata!", "Bu malzemeler ile tarif bulunamadı!", "error");
   }
 
   add(event: MatChipInputEvent): void {

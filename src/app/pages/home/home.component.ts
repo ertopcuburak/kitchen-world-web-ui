@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   loading:boolean = true;
   favRecipe:any;
 
-  constructor(private http:HttpService) { }
+  constructor(private http:HttpService, private router:Router) { }
 
   ngOnInit(): void {
     this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
@@ -174,6 +175,14 @@ export class HomeComponent implements OnInit {
 
   getAllFavsOfLoggedinUserError() {
     //Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
+  }
+
+  goToAddCategory() {
+    this.router.navigateByUrl('/pages/add-category');
+  }
+
+  goToAddRecipe() {
+    this.router.navigateByUrl('/pages/add-recipe');
   }
 
 }

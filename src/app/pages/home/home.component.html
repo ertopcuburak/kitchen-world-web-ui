@@ -133,3 +133,15 @@
         </div>
     </div>
 </div>
+
+<div class="fab-container" *ngIf="!loading && loggedinUser && loggedinUser.type === 1 && lastActiveTab==='categories'">
+    <button mat-fab class="fab-toggler" (click)="goToAddCategory()">
+      <i class="material-icons">add</i>
+    </button>
+</div>
+
+<div class="fab-container" *ngIf="!loading && loggedinUser && loggedinUser.type === 1 && lastActiveTab==='recipes'">
+    <button mat-fab class="fab-toggler" (click)="goToAddRecipe()">
+      <i class="material-icons">add</i>
+    </button>
+</div>
