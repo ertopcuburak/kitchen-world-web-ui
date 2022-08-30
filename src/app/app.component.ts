@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
 @Component({
@@ -10,6 +11,7 @@ export class AppComponent {
   title = 'kitchen-world-web-ui';
   lastActiveRoute = "pages";
   loggedinUser:any;
+  @ViewChild('drawer', { static: false }) public drawer!: MatDrawer;
 
   constructor(private router:Router, private cdr:ChangeDetectorRef, private activatedRoute:ActivatedRoute) { 
     if(sessionStorage.getItem('uname') && sessionStorage.getItem('sid')) {
@@ -27,11 +29,12 @@ export class AppComponent {
           this.cdr.detectChanges();
           this.router.navigateByUrl('/home');
         }
-        console.log(event);
+        this.drawer.toggle();
+        //console.log(event);
       }
 
       if (event instanceof NavigationError) {
-        console.log(event.error);
+        //console.log(event.error);
       }
     });
   }

@@ -40,7 +40,7 @@ export class AddCategoryComponent implements OnInit {
   }
 
   addSuccess() {
-    console.log("::KAYDETTİ::");
+    //console.log("::KAYDETTİ::");
     Swal.fire('Başarılı','Kategori Eklendi', 'success'); 
   }
 

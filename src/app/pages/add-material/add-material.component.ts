@@ -20,7 +20,7 @@ export class AddMaterialComponent implements OnInit {
   }
 
   addMaterial(data:any) {
-    console.log("::data::", data);
+    //console.log("::data::", data);
     if(!data.materialName || !data.description || !data.isBanned) {
       Swal.fire("Hata!", "Lütfen tüm alanları doldurun!", "error");
       return;
@@ -40,7 +40,7 @@ export class AddMaterialComponent implements OnInit {
   }
 
   addSuccess() {
-    console.log("::KAYDETTİ::");
+    //console.log("::KAYDETTİ::");
     Swal.fire('Başarılı','Malzeme Eklendi', 'success'); 
   }
 

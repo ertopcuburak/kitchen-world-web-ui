@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
   getCategoriesSuccess(data:any) {
     this.lastActiveTab = "categories";
-    console.log("::categories::", data);
+    //console.log("::categories::", data);
     this.categories = data;
   }
 
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
       return;
     const url = Environment.apiUrl + '/recipes/searchByName';
     const queryParams = {
-      "searchText":name
+      "searchText":name.toLowerCase()
     };
     this.http.post(url, queryParams).subscribe({
       next: this.searchRecipesSuccess.bind(this),

@@ -56,7 +56,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   getMaterialsError(error:any) {
-    console.log("::getMaterialsError - error:: ", error);
+    //console.log("::getMaterialsError - error:: ", error);
   }
 
   searchByMaterials(materials:any[]) {
@@ -105,24 +105,27 @@ export class MyKitchenComponent implements OnInit {
   }
 
   remove(material: any): void {
-    console.log("::materialToRemove::", material);
+    //console.log("::materialToRemove::", material);
     const index = this.selectedMaterials.indexOf(material);
-    console.log("::index::", index);
+    //console.log("::index::", index);
     if (index !== -1) {
       this.selectedMaterials.splice(index, 1);
     }
-    console.log("::selectedMAts::", this.selectedMaterials);
+    //console.log("::selectedMAts::", this.selectedMaterials);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log("::event.option::", event);
+    //console.log("::event.option::", event);
     this.selectedMaterials.push(event.option.value);
     this.materialInput.nativeElement.value = '';
     this.matsCtrl.setValue('');
-    console.log("::selectedMAts::", this.selectedMaterials);
+    //console.log("::selectedMAts::", this.selectedMaterials);
   }
 
   private _filter(value: string): any[] {
+    if(value && typeof(value) === 'string') {
+      value = value.toLowerCase();
+    }
     const filterValue = value;
 
     return this.materialOptions.filter(material => material.name.toLowerCase().includes(filterValue));
@@ -133,7 +136,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   isSelectedMat(material:any) {
-    console.log("::isSelectedMat::", material.materialName, this.selectedMaterials.indexOf(material.materialId) !== -1);
+    //console.log("::isSelectedMat::", material.materialName, this.selectedMaterials.indexOf(material.materialId) !== -1);
     material['selected'] = this.selectedMaterials.indexOf(material.materialId) !== -1 ? true : false;
   }
 
@@ -155,7 +158,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   searchEcommerceSuccess(data:any) {
-    console.log("::getirData::", data);
+    //console.log("::getirData::", data);
   }
 
   searchEcommerceError(error:any){

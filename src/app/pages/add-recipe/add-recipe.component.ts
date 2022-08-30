@@ -95,7 +95,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   getCategoriesError(error:any) {
-    console.log("::getCategoriesError - error:: ", error);
+    //console.log("::getCategoriesError - error:: ", error);
   }
 
   getMaterialsSuccess(data:any) {
@@ -104,12 +104,12 @@ export class AddRecipeComponent implements OnInit {
   }
 
   getMaterialsError(error:any) {
-    console.log("::getMaterialsError - error:: ", error);
+    //console.log("::getMaterialsError - error:: ", error);
   }
 
   categorySelected() {
     this.categoryId = this.selectedCategory.id;
-    console.log("::selectedCategory::", this.selectedCategory, "::categoryId::", this.categoryId);
+    //console.log("::selectedCategory::", this.selectedCategory, "::categoryId::", this.categoryId);
   }
 
   materialSelected(id:number) {
@@ -119,7 +119,7 @@ export class AddRecipeComponent implements OnInit {
     }
     this.materialList[id] = material;
     //this.materialList[id] && this.materialList[id]['quantity'] ? this.materialList[id]['quantity'] : "";
-    console.log("::materialList::", this.materialList);
+    //console.log("::materialList::", this.materialList);
   }
 
   removeSelecteMaterial(id:number) {
@@ -129,7 +129,7 @@ export class AddRecipeComponent implements OnInit {
 
   setMaterialQuantity(index:number, event:any) {
     this.materialList[index]['quantity'] = event.target.value;
-    console.log("::materialList::", this.materialList);
+    //console.log("::materialList::", this.materialList);
   }
 
   filterMaterial(value:any) {
@@ -140,7 +140,7 @@ export class AddRecipeComponent implements OnInit {
   private _filter(name: string): any[] {
     const filterValue = name.toLowerCase();
     let filtered = this.materialOptions.filter(option => option.name.toLowerCase().includes(filterValue));
-    console.log("::filtered::", filtered);
+    //console.log("::filtered::", filtered);
     return filtered;
   }
 
@@ -153,9 +153,9 @@ export class AddRecipeComponent implements OnInit {
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
     const loggedinUser:any = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
-    //console.log("::loggedinUser::", loggedinUser);
+    ////console.log("::loggedinUser::", loggedinUser);
     const userId:number | undefined = loggedinUser ? loggedinUser.id : undefined;
-    //console.log("::userId::", userId);
+    ////console.log("::userId::", userId);
     if(!data.name || !data.desc || !this.howToMake || !userId || !this.materialList || !this.categoryId || !data.imgUrl) {
       Swal.fire("Hata!", "Lütfen tüm alanları doldurun!", "error");
       return;
@@ -178,7 +178,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   addSuccess() {
-    console.log("::KAYDETTİ::");
+    //console.log("::KAYDETTİ::");
     Swal.fire('Başarılı','Tarif Eklendi', 'success'); 
   }
 

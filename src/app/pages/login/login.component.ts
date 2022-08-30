@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginSuccess(data:any) {
-    console.log("::login OK!::", data);
+    //console.log("::login OK!::", data);
     if(data) {
       sessionStorage.setItem('loggedinUser', JSON.stringify(data));
       sessionStorage.setItem('uname', data.uName);

@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
 
   signUp(data: any) {
     if (this.userData.uName && this.userData.firstName && this.userData.lastName && this.userData.email && this.userData.password && this.userData.c_password && this.userData.password === this.userData.c_password) {
-      console.log("::signupData::", this.userData);
+      //console.log("::signupData::", this.userData);
       const url = Environment.apiUrl + '/users/signup';
       const todayStr = new Date().toISOString();
       const md5 = new Md5();
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
   }
 
   addSuccess() {
-    console.log("::KAYDETTİ::");
+    //console.log("::KAYDETTİ::");
     Swal.fire('Başarılı', 'Başarıyla üye oldunuz, artık giriş yapabilirsiniz.', 'success');
     this.router.navigateByUrl('/pages/login');
   }
