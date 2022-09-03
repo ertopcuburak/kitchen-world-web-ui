@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   error:any;
   userData:any = {};
+  sid:string|undefined;
 
   constructor(private http:HttpClient, private router:Router) { }
 
@@ -30,9 +31,10 @@ export class LoginComponent implements OnInit {
     if (data && data.identifier && data.password) {
       const url = Environment.apiUrl + '/users/login';
       const md5 = new Md5();
+      this.sid = md5.appendStr(data.password).end().toString();
       const queryParams = {
         "identifier": data.identifier,
-        "pwd": md5.appendStr(data.password).end()
+        "pwd": this.sid
       };
       this.http.post(url, queryParams).subscribe({
         next: this.loginSuccess.bind(this),
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
     if(data) {
       sessionStorage.setItem('loggedinUser', JSON.stringify(data));
       sessionStorage.setItem('uname', data.uName);
-      sessionStorage.setItem('sid', data.pwd);
+      sessionStorage.setItem('sid', this.sid!);
     } else {
       Swal.fire('Hata','Giriş bilgileriniz hatalı!', 'error');
     }
