@@ -55,7 +55,7 @@
                         </div>
                     
                         <div class="text-center">
-                            <input type="submit" class="btn btn-my" value="Ne Yapabilirim?" (click)="searchByMaterials(selectedMaterials)">
+                            <input type="submit" [disabled]="!selectedMaterials || selectedMaterials.length === 0" class="btn btn-my" value="Ne Yapabilirim?" (click)="searchByMaterials(selectedMaterials)">
                         </div>
 
                     </form>
@@ -69,7 +69,8 @@
             <mat-card class="food-card">
                 <mat-card-header>
                     <mat-card-title>{{recipe.name}}</mat-card-title>
-                    <mat-card-subtitle>{{recipe.description}}</mat-card-subtitle>
+                    <mat-card-subtitle>{{recipe.recipeOwner.firstName + ' ' + recipe.recipeOwner.lastName}}</mat-card-subtitle>
+                    <img mat-card-avatar src="{{recipe.imageUrl}}" class="recipe-avatar">
                 </mat-card-header>
                 <img mat-card-image src="{{recipe.imageUrl}}">
                 <mat-card-content>
