@@ -49,3 +49,40 @@
   .fab-toggler{
     background-color: brown;
   }
+
+  .caro-card{
+    max-width: 450px;
+  }
+
+  .caro-content{
+    width:100%; 
+    background-color: brown;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  ::ng-deep .carousel-cells {
+    width: unset !important;
+  }
+
+  ::ng-deep .carousel-cell {
+    background: -webkit-linear-gradient(to right, lightgray, #F1DDBD);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, lightgray, #F1DDBD);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-weight: 500;
+    font-size: x-large;
+  }
+
+  ::ng-deep .carousel-cell img {
+    object-fit: cover !important;
+    opacity: 0.55 !important;
+  }

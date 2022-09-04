@@ -28,6 +28,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {IvyCarouselModule} from 'angular14-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatMenuModule,
     MatRadioModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    IvyCarouselModule
   ],
   providers:[HttpService]
 })
