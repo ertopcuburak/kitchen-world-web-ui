@@ -50,6 +50,10 @@ export class HomeComponent implements OnInit {
   }
 
   getRecipes(categoryId:number) {
+    const sideNav = document.getElementById('drawer');
+    if(sideNav!.classList.contains('mat-drawer-opened')) {
+      document.getElementById('btnMenuTrigger')!.click();
+    }
     this.loading = true;
     const url = Environment.apiUrl + '/recipes/categorized/'+categoryId;
     this.http.post(url, {}).subscribe({
@@ -72,14 +76,20 @@ export class HomeComponent implements OnInit {
     }
     this.loading=false;
     document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
+    console.log(document.querySelector('#btnMenuTrigger'));
   }
 
   getRecipesError() {
+    this.recipes = [];
     Swal.fire("Hata!", "Bir hata oluştu!", "error");
     this.loading=false;
   }
 
   goBackToCategories() {
+    const sideNav = document.getElementById('drawer');
+    if(sideNav!.classList.contains('mat-drawer-opened')) {
+      document.getElementById('btnMenuTrigger')!.click();
+    }
     this.loading = true;
     this.lastActiveTab = "categories";
     this.recipes = undefined;

@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-toolbar *ngIf="loggedinUser" class="menu-top">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    <button mat-icon-button id="btnMenuTrigger" class="example-icon" aria-label="Example icon-button with menu icon"
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -24,7 +24,7 @@
       </button>
     </mat-menu>
   </mat-toolbar>
-    <mat-drawer #drawer class="example-sidenav" mode="side" [hidden]="!loggedinUser">
+    <mat-drawer #drawer id="drawer" class="example-sidenav" mode="side" [hidden]="!loggedinUser">
       <div *ngIf="loggedinUser" class="container-fluid">
         <div class="row p-0 mt-4">
           <div class="col-3 p-0">
