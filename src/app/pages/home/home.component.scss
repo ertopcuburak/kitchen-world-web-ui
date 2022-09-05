@@ -79,11 +79,11 @@
     background: linear-gradient(to right, lightgray, #F1DDBD);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-weight: 300;
-    font-size: x-large;
-    border-radius: 25%;
+    font-size: large;
+    //border-radius: 25%;
   }
 
   ::ng-deep .carousel-cell img {
     object-fit: cover !important;
-    opacity: 0.45 !important;
+    opacity: 0.15 !important;
   }

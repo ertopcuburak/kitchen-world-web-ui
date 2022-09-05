@@ -47,7 +47,8 @@
 <div *ngIf="lastActiveTab === 'categories' && categories && !loading" class="container-fluid p-0">
     <div class="row p-2">
         <div class="col-12">
-            <carousel class="mb-4" style="width: 100%!important;">
+            <carousel class="mb-4" style="width: 100%!important;" 
+            [cellsToShow]="4" [cellsToScroll]="4" [arrows]="showArrows" [dots]="true" [loop]="false">
                 <div *ngFor="let category of categories" class="carousel-cell" (click)="getRecipes(category.id)">
                     <img class="caro-content" src="{{category.imageUrl}}">
                     <div class="centered">{{category.name}}</div>

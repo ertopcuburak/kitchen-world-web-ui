@@ -21,10 +21,15 @@ export class HomeComponent implements OnInit {
   loggedinUser:any;
   loading:boolean = true;
   favRecipe:any;
+  showArrows:boolean = false;
 
   constructor(private http:HttpService, private router:Router) { }
 
   ngOnInit(): void {
+    const screenSize = window.innerWidth;
+    if(screenSize > 900) {
+      this.showArrows = true;
+    }
     this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
     this.getAllFavsOfLoggedinUser();
   }
