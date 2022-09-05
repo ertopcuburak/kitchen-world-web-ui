@@ -106,6 +106,8 @@ export class HomeComponent implements OnInit {
   searchRecipes(name:string) {
     if(!name || name.length < 3)
       return;
+    this.loading = true;
+    this.recipes = [];
     const url = Environment.apiUrl + '/recipes/searchByName';
     const queryParams = {
       "searchText":name.toLowerCase()
@@ -128,10 +130,12 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+    this.loading = false;
   }
 
   searchRecipesError() {
-
+    this.recipes = [];
+    this.loading = false;
   }
 
   searchEcommerce(keyword:string, ecommerceBrand:string){
@@ -140,6 +144,8 @@ export class HomeComponent implements OnInit {
       window.open(Environment.migrosSearchUrl+keyword, '_blank');
     } else if(ecommerceBrand === 'trendyol') {
       window.open(Environment.trendyolSearchUrl+keyword, '_blank');
+    } else if(ecommerceBrand === 'istegelsin') {
+      window.open(Environment.isteGelsinSearchUrl+keyword, '_blank');
     }
     
   }

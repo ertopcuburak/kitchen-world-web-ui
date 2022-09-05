@@ -3,12 +3,13 @@
         <div class="col-12">
             <mat-card class="food-card">
                 <mat-card-content>
-                    <mat-progress-spinner
+                    <!-- <mat-progress-spinner
                         class="loading-ind"
                         [color]="'warn'"
                         [mode]="'indeterminate'"
                         [value]="'50'">
-                    </mat-progress-spinner>
+                    </mat-progress-spinner> -->
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                     <i>Yükleniyor, lütfen bekleyiniz...</i>
                 </mat-card-content>
             </mat-card>
@@ -56,6 +57,9 @@
                                         <button mat-menu-item
                                             (click)="searchEcommerce(material.materialName, 'trendyol')">
                                             <span>Trendyol</span>
+                                        </button>
+                                        <button mat-menu-item (click)="searchEcommerce(material.materialName, 'istegelsin')">
+                                            <span>istegelsin</span>
                                         </button>
                                     </mat-menu>
                                     <!-- <button class="btn btn-my-danger mt-0" (click)="searchEcommerce(material.materialName)"> 

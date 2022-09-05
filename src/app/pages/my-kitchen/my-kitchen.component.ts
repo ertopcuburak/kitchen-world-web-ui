@@ -155,6 +155,8 @@ export class MyKitchenComponent implements OnInit {
       window.open(Environment.migrosSearchUrl+keyword, '_blank');
     } else if(ecommerceBrand === 'trendyol') {
       window.open(Environment.trendyolSearchUrl+keyword, '_blank');
+    } else if(ecommerceBrand === 'istegelsin') {
+      window.open(Environment.isteGelsinSearchUrl+keyword, '_blank');
     }
     
   }
