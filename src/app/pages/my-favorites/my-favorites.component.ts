@@ -80,6 +80,7 @@ export class MyFavoritesComponent implements OnInit {
   removeFavSuccess(data:any) {
     this.recipes = data;
     this.loading = false;
+    this._snackBar.open("Tarif favorilerinizden çıkarıldı!", "Kapat", {duration:5000});
     this.getFavorites();
   }
 
