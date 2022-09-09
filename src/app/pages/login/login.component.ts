@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   userData:any = {};
   sid:string|undefined;
 
-  constructor(private http:HttpClient, private router:Router) { }
+  constructor(private http:HttpClient, private router:Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -50,14 +51,14 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('uname', data.uName);
       sessionStorage.setItem('sid', this.sid!);
     } else {
-      Swal.fire('Hata','Giriş bilgileriniz hatalı!', 'error');
+      this._snackBar.open("Giriş bilgileriniz hatalı!", "Kapat", {duration:5000});
     }
     this.router.navigateByUrl('/home');
   }
 
   loginError() {
     sessionStorage.clear();
-    Swal.fire('Hata','Giriş bilgileriniz hatalı!', 'error');
+    this._snackBar.open("Giriş bilgileriniz hatalı!", "Kapat", {duration:5000});
   }
 
   goToSignUp() {

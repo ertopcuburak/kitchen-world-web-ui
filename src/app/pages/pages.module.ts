@@ -30,6 +30,7 @@ import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {IvyCarouselModule} from 'angular14-responsive-carousel';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatRadioModule,
     MatProgressSpinnerModule,
     IvyCarouselModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   providers:[HttpService]
 })

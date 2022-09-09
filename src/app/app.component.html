@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container" autosize>
-  <mat-toolbar *ngIf="loggedinUser" class="menu-top">
+  <mat-toolbar *ngIf="loggedinUser" [ngClass]="{'menu-top-desktop':true, 'menu-top-mobile':platform.IOS || platform.ANDROID}">
     <button mat-icon-button id="btnMenuTrigger" class="example-icon" aria-label="Example icon-button with menu icon"
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>

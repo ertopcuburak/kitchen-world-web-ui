@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
-import { ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, NavigationError, Router } from '@angular/router';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   loggedinUser:any;
   @ViewChild('drawer', { static: false }) public drawer!: MatDrawer;
 
-  constructor(private router:Router, private cdr:ChangeDetectorRef, private activatedRoute:ActivatedRoute) { 
+  constructor(private router:Router, private cdr:ChangeDetectorRef, public platform: Platform) { 
     if(sessionStorage.getItem('uname') && sessionStorage.getItem('sid')) {
       this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
       this.router.navigateByUrl('/home');

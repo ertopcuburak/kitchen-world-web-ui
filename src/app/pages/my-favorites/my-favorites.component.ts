@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import { Slugify } from 'src/app/utils/slugify';
@@ -14,7 +15,7 @@ export class MyFavoritesComponent implements OnInit {
   loggedinUser:any;
   loading:boolean = true;
 
-  constructor(private http:HttpService) { }
+  constructor(private http:HttpService, private _snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
     this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
@@ -43,7 +44,7 @@ export class MyFavoritesComponent implements OnInit {
 
   searchRecipesError() {
     this.loading = false;
-    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
   }
 
   searchEcommerce(keyword:string, ecommerceBrand:string){
@@ -84,7 +85,7 @@ export class MyFavoritesComponent implements OnInit {
 
   removeFavError() {
     this.loading = false;
-    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
   }
 
 }

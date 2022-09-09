@@ -151,7 +151,7 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-icon-button class="example-icon" [ngClass]="{'favorite-icon':recipe.isFav}"
-                        aria-label="Example icon-button with heart icon">
+                        aria-label="Example icon-button with heart icon" (click)="addToFavorites(recipe)">
                         <mat-icon>favorite</mat-icon>
                     </button>
                     <span *ngIf="recipe.favCount">{{recipe.favCount}}</span>

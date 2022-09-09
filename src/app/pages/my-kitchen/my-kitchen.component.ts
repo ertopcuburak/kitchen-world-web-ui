@@ -10,6 +10,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { Slugify } from 'src/app/utils/slugify';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-my-kitchen',
@@ -28,11 +29,12 @@ export class MyKitchenComponent implements OnInit {
   loggedinUser:any;
   favorites:any[] = [];
   loading:boolean = true;
+  favRecipe:any;
   
   @ViewChild('materialInput')
   materialInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private http:HttpService) {
+  constructor(private http:HttpService, private _snackBar: MatSnackBar) {
     this.filteredMaterials = this.matsCtrl.valueChanges.pipe(
       startWith(null),
       map((material: string | null) => (material ? this._filter(material) : this.materialOptions.slice())),
@@ -61,7 +63,7 @@ export class MyKitchenComponent implements OnInit {
 
   getMaterialsError(error:any) {
     this.loading = false;
-    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
     //console.log("::getMaterialsError - error:: ", error);
   }
 
@@ -96,7 +98,7 @@ export class MyKitchenComponent implements OnInit {
 
   searchRecipesError() {
     this.loading = false;
-    Swal.fire("Hata!", "Bu malzemeler ile tarif bulunamadı!", "error");
+    this._snackBar.open("Bu malzemeler ile tarif bulunamadı!", "Kapat", {duration:5000});
   }
 
   add(event: MatChipInputEvent): void {
@@ -166,7 +168,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   searchEcommerceError(error:any){
-    Swal.fire("Hata!",error,"error");
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
   }
 
   getAllFavsOfLoggedinUser() {
@@ -189,6 +191,34 @@ export class MyKitchenComponent implements OnInit {
 
   getAllFavsOfLoggedinUserError() {
     
+  }
+
+  addToFavorites(recipe:any) {
+    if(!recipe)
+      return;
+    this.favRecipe = recipe;
+    const todayStr = new Date().toISOString();
+    const url = Environment.apiUrl + '/favorites/';
+    const queryParams = {
+      "userId":this.loggedinUser.id,
+      "recipeId":recipe.id,
+      "favDate":todayStr
+    };
+    this.http.post(url, queryParams).subscribe({
+      next: this.addToFavoritesSuccess.bind(this),
+      error: this.addToFavoritesError.bind(this)
+    });
+  }
+
+  addToFavoritesSuccess(data:any) {
+    this.favRecipe["isFav"] = true;
+    this.favRecipe.favCount += 1;
+    this._snackBar.open("Tarif favorilerinize eklendi!", "Kapat", {duration:5000});
+  }
+
+  addToFavoritesError() {
+    this.favRecipe = undefined;
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
   }
 
 }

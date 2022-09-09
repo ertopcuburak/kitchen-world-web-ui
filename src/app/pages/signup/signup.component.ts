@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
@@ -13,7 +14,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 export class SignupComponent implements OnInit {
   userData: any = {};
   isAdmin = 0;
-  constructor(private http: HttpService, private router:Router) { }
+  constructor(private http: HttpService, private router:Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -39,18 +40,18 @@ export class SignupComponent implements OnInit {
         error: this.addError.bind(this)
       });
     } else {
-      Swal.fire("Hata", "Eksik/hatalı bilgi girdiniz, lütfen kontrol edip tekrar deneyiniz.", "error")
+      this._snackBar.open("Eksik/hatalı bilgi girdiniz, lütfen kontrol edip tekrar deneyiniz.", "Kapat", {duration:5000});
     }
   }
 
   addSuccess() {
     //console.log("::KAYDETTİ::");
-    Swal.fire('Başarılı', 'Başarıyla üye oldunuz, artık giriş yapabilirsiniz.', 'success');
+    this._snackBar.open("Başarıyla üye oldunuz, artık giriş yapabilirsiniz!", "Kapat", {duration:5000});
     this.router.navigateByUrl('/pages/login');
   }
 
   addError() {
-    Swal.fire('Hata', 'Bir hata oluştu!', 'error');
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
   }
 
 }

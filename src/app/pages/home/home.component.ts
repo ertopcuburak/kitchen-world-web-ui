@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   favRecipe:any;
   showArrows:boolean = false;
 
-  constructor(private http:HttpService, private router:Router) { }
+  constructor(private http:HttpService, private router:Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     const screenSize = window.innerWidth;
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCategoriesError() {
-    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
     this.loading = false;
   }
 
@@ -86,7 +87,7 @@ export class HomeComponent implements OnInit {
 
   getRecipesError() {
     this.recipes = [];
-    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
     this.loading=false;
   }
 
@@ -170,12 +171,12 @@ export class HomeComponent implements OnInit {
   addToFavoritesSuccess(data:any) {
     this.favRecipe["isFav"] = true;
     this.favRecipe.favCount += 1;
-    Swal.fire("OK", "Tarif favorilerinize eklendi!", "success");
+    this._snackBar.open("Tarif Favorilerinize Eklendi!", "Kapat", {duration:5000});
   }
 
   addToFavoritesError() {
     this.favRecipe = undefined;
-    Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
+    this._snackBar.open("Bu tarifi daha önce favorilerinize eklediniz!", "Kapat", {duration:5000});
   }
 
   getAllFavsOfLoggedinUser() {
@@ -198,6 +199,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllFavsOfLoggedinUserError() {
+    
     //Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
   }
 
