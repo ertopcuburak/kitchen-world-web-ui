@@ -169,6 +169,7 @@ export class HomeComponent implements OnInit {
 
   addToFavoritesSuccess(data:any) {
     this.favRecipe["isFav"] = true;
+    this.favRecipe.favCount += 1;
     Swal.fire("OK", "Tarif favorilerinize eklendi!", "success");
   }
 

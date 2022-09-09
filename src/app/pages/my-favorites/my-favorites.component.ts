@@ -58,4 +58,33 @@ export class MyFavoritesComponent implements OnInit {
     
   }
 
+  removeFav(recipe:any) {
+    if(!recipe || !this.loggedinUser) {
+      return;
+    }
+    this.loading = true;
+    this.recipes = [];
+    const url = Environment.apiUrl + '/favorites/deleteFav';
+    const queryParams = {
+      "userId":this.loggedinUser.id,
+      "recipeId":recipe.id
+    };
+    this.http.post(url, queryParams).subscribe({
+      next: this.removeFavSuccess.bind(this),
+      error: this.removeFavError.bind(this)
+    });
+
+  }
+
+  removeFavSuccess(data:any) {
+    this.recipes = data;
+    this.loading = false;
+    this.getFavorites();
+  }
+
+  removeFavError() {
+    this.loading = false;
+    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+  }
+
 }

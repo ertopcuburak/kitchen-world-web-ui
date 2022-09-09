@@ -84,13 +84,23 @@
                     </div>
                 </mat-card-content>
                 <mat-card-actions>
-                    <!-- <button mat-icon-button class="example-icon favorite-icon"
-                        aria-label="Example icon-button with heart icon">
-                        <mat-icon>favorite</mat-icon>
-                    </button> -->
-                    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                        <mat-icon>share</mat-icon>
-                    </button> -->
+                    <div class="container-fluid p-0">
+                        <div class="row p-0">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <button mat-icon-button class="example-icon"
+                                    aria-label="Example icon-button with heart icon" (click)="removeFav(recipe)">
+                                    <mat-icon>block</mat-icon>
+                                    Favorilerimden Çıkar
+                                </button>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                                <button mat-icon-button class="example-icon favorite-icon">
+                                    <mat-icon>favorite</mat-icon>
+                                </button>
+                                <span *ngIf="recipe.favCount">{{recipe.favCount}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </mat-card-actions>
             </mat-card>
         </div>
