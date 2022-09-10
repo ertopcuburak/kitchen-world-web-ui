@@ -160,7 +160,13 @@
     </button>
 </div>
 
-<div class="fab-container" *ngIf="!loading && loggedinUser && loggedinUser.type === 1 && lastActiveTab==='recipes'">
+<div class="fab-container" *ngIf="lastActiveTab==='recipes' && recipes && recipes.length > 0">
+    <button mat-fab class="fab-toggler" (click)="goBackToCategories()">
+      <i class="material-icons">arrow_back</i>
+    </button>
+</div>
+
+<div class="add-recipe-toggler" *ngIf="!loading && loggedinUser && loggedinUser.type === 1 && lastActiveTab==='recipes'">
     <button mat-fab class="fab-toggler" (click)="goToAddRecipe()">
       <i class="material-icons">add</i>
     </button>
