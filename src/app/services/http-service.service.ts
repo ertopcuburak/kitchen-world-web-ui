@@ -13,7 +13,7 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'Basic ' + window.btoa(sessionStorage.getItem('uname')+':'+sessionStorage.getItem('sid'))
+        'Authorization': 'Basic ' + window.btoa(localStorage.getItem('uname')+':'+localStorage.getItem('sid'))
       })
     };
     return this.http.post(url, body, httpOptions);
@@ -27,7 +27,7 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'Basic ' + window.btoa(sessionStorage.getItem('uname')+':'+sessionStorage.getItem('sid'))
+        'Authorization': 'Basic ' + window.btoa(localStorage.getItem('uname')+':'+localStorage.getItem('sid'))
       })
     };
     return this.http.get(url, httpOptions);

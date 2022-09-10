@@ -18,7 +18,7 @@ export class MyFavoritesComponent implements OnInit {
   constructor(private http:HttpService, private _snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
-    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
     this.getFavorites();
   }
 

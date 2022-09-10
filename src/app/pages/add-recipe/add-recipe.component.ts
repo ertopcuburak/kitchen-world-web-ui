@@ -152,7 +152,7 @@ export class AddRecipeComponent implements OnInit {
     const url = Environment.apiUrl+'/recipes/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
-    const loggedinUser:any = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+    const loggedinUser:any = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
     ////console.log("::loggedinUser::", loggedinUser);
     const userId:number | undefined = loggedinUser ? loggedinUser.id : undefined;
     ////console.log("::userId::", userId);

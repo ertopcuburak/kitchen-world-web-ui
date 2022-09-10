@@ -47,9 +47,9 @@ export class LoginComponent implements OnInit {
   loginSuccess(data:any) {
     //console.log("::login OK!::", data);
     if(data) {
-      sessionStorage.setItem('loggedinUser', JSON.stringify(data));
-      sessionStorage.setItem('uname', data.uName);
-      sessionStorage.setItem('sid', this.sid!);
+      localStorage.setItem('loggedinUser', JSON.stringify(data));
+      localStorage.setItem('uname', data.uName);
+      localStorage.setItem('sid', this.sid!);
     } else {
       this._snackBar.open("Giriş bilgileriniz hatalı!", "Kapat", {duration:5000});
     }
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginError() {
-    sessionStorage.clear();
+    localStorage.clear();
     this._snackBar.open("Giriş bilgileriniz hatalı!", "Kapat", {duration:5000});
   }
 

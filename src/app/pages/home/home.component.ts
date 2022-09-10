@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     if(screenSize > 900) {
       this.showArrows = true;
     }
-    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
     this.getAllFavsOfLoggedinUser();
   }
 

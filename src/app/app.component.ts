@@ -15,8 +15,8 @@ export class AppComponent {
   @ViewChild('drawer', { static: false }) public drawer!: MatDrawer;
 
   constructor(private router:Router, private cdr:ChangeDetectorRef, public platform: Platform) { 
-    if(sessionStorage.getItem('uname') && sessionStorage.getItem('sid')) {
-      this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+    if(localStorage.getItem('uname') && localStorage.getItem('sid')) {
+      this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
       this.router.navigateByUrl('/home');
     }
   }
@@ -25,8 +25,8 @@ export class AppComponent {
     this.router.events.subscribe((event: any): void => {
       if (event instanceof NavigationEnd) {
         // Hide progress spinner or progress bar
-        if (!this.loggedinUser && sessionStorage.getItem('uname') && sessionStorage.getItem('sid')) {
-          this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+        if (!this.loggedinUser && localStorage.getItem('uname') && localStorage.getItem('sid')) {
+          this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
           this.cdr.detectChanges();
           this.router.navigateByUrl('/home');
         }
@@ -47,7 +47,7 @@ export class AppComponent {
   }
 
   logOut() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.loggedinUser = undefined;
     this.cdr.detectChanges();
     this.router.navigateByUrl('/pages/login');

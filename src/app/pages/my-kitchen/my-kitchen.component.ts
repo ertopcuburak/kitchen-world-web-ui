@@ -42,7 +42,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
     this.getAllFavsOfLoggedinUser();
     this.getMaterials();
   }
