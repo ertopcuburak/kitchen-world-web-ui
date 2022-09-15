@@ -56,7 +56,7 @@
                         </div>
                     
                         <div class="text-center">
-                            <input type="submit" [disabled]="!selectedMaterials || selectedMaterials.length === 0" class="btn btn-my" value="Ne Yapabilirim?" (click)="searchByMaterials(selectedMaterials)">
+                            <input type="submit" [disabled]="!selectedMaterials || selectedMaterials.length < 3" class="btn btn-my" value="Ne Yapabilirim?" (click)="searchByMaterials(selectedMaterials)">
                         </div>
 
                     </form>
@@ -64,6 +64,17 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="isSearchPressed && (!recipes || recipes.length === 0) && !loading" class="row p-2">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <mat-card class="food-card">
+                <mat-card-content>
+                    <i>Üzgünüz, malzemeler ile eşleşen tarif bulunamadı.</i>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    
 
     <div *ngFor="let recipe of recipes" class="row p-2">
         <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">

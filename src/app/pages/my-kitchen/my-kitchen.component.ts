@@ -33,6 +33,7 @@ export class MyKitchenComponent implements OnInit {
   
   @ViewChild('materialInput')
   materialInput!: ElementRef<HTMLInputElement>;
+  isSearchPressed: boolean = false;
 
   constructor(private http:HttpService, private _snackBar: MatSnackBar) {
     this.filteredMaterials = this.matsCtrl.valueChanges.pipe(
@@ -68,10 +69,14 @@ export class MyKitchenComponent implements OnInit {
   }
 
   searchByMaterials(materials:any[]) {
+    this.isSearchPressed = true;
     this.loading = true;
     this.recipes = [];
-    if(!materials || materials.length === 0)
+    if(!materials || materials.length < 3) {
+      this._snackBar.open("Daha fazla malzeme girin!", "Kapat", {duration:5000});
+      this.loading = false;
       return;
+    }
     const url = Environment.apiUrl + '/recipes/searchByMaterials';
     const queryParams = {
       "materials":materials
@@ -116,6 +121,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   remove(material: any): void {
+    this.isSearchPressed = false;
     //console.log("::materialToRemove::", material);
     const index = this.selectedMaterials.indexOf(material);
     //console.log("::index::", index);
