@@ -72,7 +72,7 @@ export class MyKitchenComponent implements OnInit {
     this.isSearchPressed = true;
     this.loading = true;
     this.recipes = [];
-    if(!materials || materials.length < 3) {
+    if(!materials || materials.length === 0) {
       this._snackBar.open("Daha fazla malzeme girin!", "Kapat", {duration:5000});
       this.loading = false;
       return;
