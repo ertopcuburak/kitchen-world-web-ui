@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     } else {
       this._snackBar.open("Giriş bilgileriniz hatalı!", "Kapat", {duration:5000});
     }
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/pages/auth-check');
   }
 
   loginError() {

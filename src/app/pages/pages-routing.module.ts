@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 import { MyKitchenComponent } from './my-kitchen/my-kitchen.component';
 import { SignupComponent } from './signup/signup.component';
+import { AppComponent } from '../app.component';
+import { MyNotifsComponent } from './my-notifs/my-notifs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'add-recipe', component: AddRecipeComponent },
   { path: 'add-category', component: AddCategoryComponent },
   { path: 'my-kitchen', component: MyKitchenComponent },
-  { path: 'my-favorites', component: MyFavoritesComponent }
+  { path: 'my-favorites', component: MyFavoritesComponent },
+  { path: 'my-notifs', component: MyNotifsComponent },
+  { path: 'auth-check', component: AppComponent }
 ];
 
 @NgModule({

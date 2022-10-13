@@ -31,6 +31,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {IvyCarouselModule} from 'angular14-responsive-carousel';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
+import { MyNotifsComponent } from './my-notifs/my-notifs.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     LoginComponent,
     SignupComponent,
     MyKitchenComponent,
-    MyFavoritesComponent
+    MyFavoritesComponent,
+    MyNotifsComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +69,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
     IvyCarouselModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatBadgeModule
   ],
   providers:[HttpService]
 })

@@ -12,6 +12,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpService } from './services/http-service.service';
 import { MatMenuModule } from '@angular/material/menu';
 import {PlatformModule} from '@angular/cdk/platform';
+import {MatBadgeModule} from '@angular/material/badge';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {PlatformModule} from '@angular/cdk/platform';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBadgeModule,
+    HttpClientModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

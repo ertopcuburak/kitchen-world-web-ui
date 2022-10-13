@@ -199,8 +199,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllFavsOfLoggedinUserError() {
-    
-    //Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
+    //this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
   }
 
   goToAddCategory() {
