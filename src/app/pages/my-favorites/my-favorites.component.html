@@ -3,12 +3,13 @@
         <div class="col-12">
             <mat-card class="food-card">
                 <mat-card-content>
-                    <mat-progress-spinner
+                    <!-- <mat-progress-spinner
                         class="loading-ind"
                         [color]="'warn'"
                         [mode]="'indeterminate'"
                         [value]="'50'">
-                    </mat-progress-spinner>
+                    </mat-progress-spinner> -->
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                     <i>Yükleniyor, lütfen bekleyiniz...</i>
                 </mat-card-content>
             </mat-card>
@@ -29,9 +30,9 @@
                 <mat-card-header>
                     <mat-card-title>{{recipe.name}}</mat-card-title>
                     <mat-card-subtitle>{{recipe.recipeOwner.firstName + ' ' + recipe.recipeOwner.lastName}}</mat-card-subtitle>
-                    <img mat-card-avatar src="{{recipe.imageUrl}}" class="recipe-avatar">
+                    <img mat-card-avatar src="{{recipe.imageUrl.startsWith('/') ? apiUrlConst+recipe.imageUrl : recipe.imageUrl}}" class="recipe-avatar">
                 </mat-card-header>
-                <img mat-card-image src="{{recipe.imageUrl}}">
+                <img mat-card-image src="{{recipe.imageUrl.startsWith('/') ? apiUrlConst+recipe.imageUrl : recipe.imageUrl}}">
                 <mat-card-content>
                     <div class="container-fluid p-0">
                         <div class="row p-0">
@@ -49,13 +50,17 @@
                                         <i class="fa fa-cart-plus"></i>
                                     </button>
                                     <mat-menu #menu="matMenu">
-                                        <button mat-menu-item
-                                            (click)="searchEcommerce(material.materialName, 'migros')">
-                                            <span>Migros</span>
+                                        <button mat-menu-item (click)="searchEcommerce(material.materialName, 'migros')">
+                                            <img class="ecommerce-brand" src="https://www.migros.com.tr/assets/logos/sanalmarket/sanalmarket-logo.svg" />
+                                            <!-- <span>Migros</span> -->
                                         </button>
-                                        <button mat-menu-item
-                                            (click)="searchEcommerce(material.materialName, 'trendyol')">
-                                            <span>Trendyol</span>
+                                        <button mat-menu-item (click)="searchEcommerce(material.materialName, 'trendyol')">
+                                            <img class="ecommerce-brand" src="https://cdn.dsmcdn.com/web/logo/ty-web.svg" />
+                                            <!-- <span>Trendyol</span> -->
+                                        </button>
+                                        <button mat-menu-item (click)="searchEcommerce(material.materialName, 'istegelsin')">
+                                            <img class="ecommerce-brand" src="https://static.istegelsin.com/v3-img/logo/ig-web-v3.svg" />
+                                            <!-- <span>istegelsin</span> -->
                                         </button>
                                     </mat-menu>
                                     <!-- <button class="btn btn-my-danger mt-0" (click)="searchEcommerce(material.materialName)"> 
@@ -79,13 +84,23 @@
                     </div>
                 </mat-card-content>
                 <mat-card-actions>
-                    <!-- <button mat-icon-button class="example-icon favorite-icon"
-                        aria-label="Example icon-button with heart icon">
-                        <mat-icon>favorite</mat-icon>
-                    </button> -->
-                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                        <mat-icon>share</mat-icon>
-                    </button>
+                    <div class="container-fluid p-0">
+                        <div class="row p-0">
+                            <div class="col-6">
+                                <button mat-button class="example-icon p-0"
+                                    aria-label="Example icon-button with heart icon" (click)="removeFav(recipe)">
+                                    <mat-icon>block</mat-icon>
+                                    Favorilerimden Çıkar
+                                </button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button mat-icon-button class="example-icon favorite-icon">
+                                    <mat-icon>favorite</mat-icon>
+                                </button>
+                                <span *ngIf="recipe.favCount">{{recipe.favCount}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </mat-card-actions>
             </mat-card>
         </div>

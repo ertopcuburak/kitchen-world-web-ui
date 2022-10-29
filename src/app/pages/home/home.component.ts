@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
@@ -21,11 +22,17 @@ export class HomeComponent implements OnInit {
   loggedinUser:any;
   loading:boolean = true;
   favRecipe:any;
+  showArrows:boolean = false;
+  apiUrlConst = Environment.apiUrl;
 
-  constructor(private http:HttpService, private router:Router) { }
+  constructor(private http:HttpService, private router:Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedinUser'))));
+    const screenSize = window.innerWidth;
+    if(screenSize > 900) {
+      this.showArrows = true;
+    }
+    this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
     this.getAllFavsOfLoggedinUser();
   }
 
@@ -45,11 +52,15 @@ export class HomeComponent implements OnInit {
   }
 
   getCategoriesError() {
-    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
     this.loading = false;
   }
 
   getRecipes(categoryId:number) {
+    const sideNav = document.getElementById('drawer');
+    if(sideNav!.classList.contains('mat-drawer-opened')) {
+      document.getElementById('btnMenuTrigger')!.click();
+    }
     this.loading = true;
     const url = Environment.apiUrl + '/recipes/categorized/'+categoryId;
     this.http.post(url, {}).subscribe({
@@ -72,14 +83,20 @@ export class HomeComponent implements OnInit {
     }
     this.loading=false;
     document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
+   //console.log(document.querySelector('#btnMenuTrigger'));
   }
 
   getRecipesError() {
-    Swal.fire("Hata!", "Bir hata oluştu!", "error");
+    this.recipes = [];
+    this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
     this.loading=false;
   }
 
   goBackToCategories() {
+    const sideNav = document.getElementById('drawer');
+    if(sideNav!.classList.contains('mat-drawer-opened')) {
+      document.getElementById('btnMenuTrigger')!.click();
+    }
     this.loading = true;
     this.lastActiveTab = "categories";
     this.recipes = undefined;
@@ -91,6 +108,8 @@ export class HomeComponent implements OnInit {
   searchRecipes(name:string) {
     if(!name || name.length < 3)
       return;
+    this.loading = true;
+    this.recipes = [];
     const url = Environment.apiUrl + '/recipes/searchByName';
     const queryParams = {
       "searchText":name.toLowerCase()
@@ -113,10 +132,12 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+    this.loading = false;
   }
 
   searchRecipesError() {
-
+    this.recipes = [];
+    this.loading = false;
   }
 
   searchEcommerce(keyword:string, ecommerceBrand:string){
@@ -125,6 +146,8 @@ export class HomeComponent implements OnInit {
       window.open(Environment.migrosSearchUrl+keyword, '_blank');
     } else if(ecommerceBrand === 'trendyol') {
       window.open(Environment.trendyolSearchUrl+keyword, '_blank');
+    } else if(ecommerceBrand === 'istegelsin') {
+      window.open(Environment.isteGelsinSearchUrl+keyword, '_blank');
     }
     
   }
@@ -148,12 +171,13 @@ export class HomeComponent implements OnInit {
 
   addToFavoritesSuccess(data:any) {
     this.favRecipe["isFav"] = true;
-    Swal.fire("OK", "Tarif favorilerinize eklendi!", "success");
+    this.favRecipe.favCount += 1;
+    this._snackBar.open("Tarif Favorilerinize Eklendi!", "Kapat", {duration:5000});
   }
 
   addToFavoritesError() {
     this.favRecipe = undefined;
-    Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
+    this._snackBar.open("Bu tarifi daha önce favorilerinize eklediniz!", "Kapat", {duration:5000});
   }
 
   getAllFavsOfLoggedinUser() {
@@ -176,7 +200,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllFavsOfLoggedinUserError() {
-    //Swal.fire("Hata!", "Bu tarifi daha önce favorilerinize eklediniz!", "error");
+    //this._snackBar.open("Bir hata oluştu!", "Kapat", {duration:5000});
   }
 
   goToAddCategory() {

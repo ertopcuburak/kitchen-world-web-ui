@@ -3,12 +3,13 @@
         <div class="col-12">
             <mat-card class="food-card">
                 <mat-card-content>
-                    <mat-progress-spinner
+                    <!-- <mat-progress-spinner
                         class="loading-ind"
                         [color]="'warn'"
                         [mode]="'indeterminate'"
                         [value]="'50'">
-                    </mat-progress-spinner>
+                    </mat-progress-spinner> -->
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                     <i>Yükleniyor, lütfen bekleyiniz...</i>
                 </mat-card-content>
             </mat-card>
@@ -46,6 +47,17 @@
 
 <div *ngIf="lastActiveTab === 'categories' && categories && !loading" class="container-fluid p-0">
     <div class="row p-2">
+        <div class="col-12">
+            <carousel class="mb-4" style="width: 100%!important;" 
+            [cellsToShow]="4" [cellsToScroll]="4" [arrows]="showArrows" [dots]="true" [loop]="false">
+                <div *ngFor="let category of categories" class="carousel-cell" (click)="getRecipes(category.id)">
+                    <img class="caro-content" src="{{category.imageUrl}}">
+                    <div class="centered">{{category.name}}</div>
+                </div>
+            </carousel>
+        </div>
+    </div>
+    <div class="row p-2">
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" *ngFor="let category of categories" (click)="getRecipes(category.id)">
             <mat-card class="example-card category-card mb-4">
                 <mat-card-header>
@@ -68,9 +80,9 @@
                 <mat-card-header>
                     <mat-card-title>{{recipe.name}}</mat-card-title>
                     <mat-card-subtitle>{{recipe.recipeOwner.firstName + ' ' + recipe.recipeOwner.lastName}}</mat-card-subtitle>
-                    <img mat-card-avatar src="{{recipe.imageUrl}}" class="recipe-avatar">
+                    <img mat-card-avatar src="{{recipe.imageUrl.startsWith('/') ? apiUrlConst+recipe.imageUrl : recipe.imageUrl}}" class="recipe-avatar">
                 </mat-card-header>
-                <img mat-card-image src="{{recipe.imageUrl}}">
+                <img mat-card-image src="{{recipe.imageUrl.startsWith('/') ? apiUrlConst+recipe.imageUrl : recipe.imageUrl}}">
                 <mat-card-content>
                     <div class="container-fluid p-0">
                         <div class="row p-0">
@@ -88,10 +100,16 @@
                                 </button>
                                 <mat-menu #menu="matMenu">
                                     <button mat-menu-item (click)="searchEcommerce(material.materialName, 'migros')">
-                                        <span>Migros</span>
+                                        <img class="ecommerce-brand" src="https://www.migros.com.tr/assets/logos/sanalmarket/sanalmarket-logo.svg" />
+                                        <!-- <span>Migros</span> -->
                                     </button>
                                     <button mat-menu-item (click)="searchEcommerce(material.materialName, 'trendyol')">
-                                        <span>Trendyol</span>
+                                        <img class="ecommerce-brand" src="https://cdn.dsmcdn.com/web/logo/ty-web.svg" />
+                                        <!-- <span>Trendyol</span> -->
+                                    </button>
+                                    <button mat-menu-item (click)="searchEcommerce(material.materialName, 'istegelsin')">
+                                        <img class="ecommerce-brand" src="https://static.istegelsin.com/v3-img/logo/ig-web-v3.svg" />
+                                        <!-- <span>istegelsin</span> -->
                                     </button>
                                 </mat-menu>
                                 {{material.quantity ? material.quantity + ' ' + material.materialName : material.materialName}}
@@ -114,9 +132,10 @@
                         aria-label="Example icon-button with heart icon" (click)="addToFavorites(recipe)">
                         <mat-icon>favorite</mat-icon>
                     </button>
-                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                    <span *ngIf="recipe.favCount">{{recipe.favCount}}</span>
+                    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
                         <mat-icon>share</mat-icon>
-                    </button>
+                    </button> -->
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -141,7 +160,13 @@
     </button>
 </div>
 
-<div class="fab-container" *ngIf="!loading && loggedinUser && loggedinUser.type === 1 && lastActiveTab==='recipes'">
+<div class="fab-container" *ngIf="lastActiveTab==='recipes' && recipes && recipes.length > 0">
+    <button mat-fab class="fab-toggler" (click)="goBackToCategories()">
+      <i class="material-icons">arrow_back</i>
+    </button>
+</div>
+
+<div class="add-recipe-toggler" *ngIf="!loading && loggedinUser && loggedinUser.type === 1 && lastActiveTab==='recipes'">
     <button mat-fab class="fab-toggler" (click)="goToAddRecipe()">
       <i class="material-icons">add</i>
     </button>

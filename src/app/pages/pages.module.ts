@@ -28,6 +28,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import { MyFavoritesComponent } from './my-favorites/my-favorites.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {IvyCarouselModule} from 'angular14-responsive-carousel';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
+import { MyNotifsComponent } from './my-notifs/my-notifs.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     LoginComponent,
     SignupComponent,
     MyKitchenComponent,
-    MyFavoritesComponent
+    MyFavoritesComponent,
+    MyNotifsComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +66,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatMenuModule,
     MatRadioModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    IvyCarouselModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatBadgeModule
   ],
   providers:[HttpService]
 })
