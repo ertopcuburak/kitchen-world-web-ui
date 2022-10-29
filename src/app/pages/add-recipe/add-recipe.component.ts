@@ -150,15 +150,15 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onFileChanged(event:any) {
-    console.log("::onFileChanged::",event);
+   //console.log("::onFileChanged::",event);
     const file = event.target.files[0];
-    console.log("::onFileChanged file::",file);
+   //console.log("::onFileChanged file::",file);
     this.recipeImg = file;
-    console.log("::onFileChanged recipeImg::",this.recipeImg);
+   //console.log("::onFileChanged recipeImg::",this.recipeImg);
   }
 
   saveRecipe(data:any) {
-    console.log("::recipeImg::", this.recipeImg);
+   //console.log("::recipeImg::", this.recipeImg);
     const url = Environment.apiUrl+'/recipes/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');

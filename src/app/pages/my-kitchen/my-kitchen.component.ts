@@ -108,8 +108,10 @@ export class MyKitchenComponent implements OnInit {
   }
 
   add(event: MatChipInputEvent): void {
+   //console.log("::event.option::", event);
+    if(!event || !event.value ) return;
     const value = (event.value || '').trim();
-
+    if(!(+value)) return;
     // Add our fruit
     if (value) {
       this.selectedMaterials.push(+value);
@@ -123,7 +125,7 @@ export class MyKitchenComponent implements OnInit {
 
   remove(material: any): void {
     this.isSearchPressed = false;
-    //console.log("::materialToRemove::", material);
+   //console.log("::materialToRemove::", material);
     const index = this.selectedMaterials.indexOf(material);
     //console.log("::index::", index);
     if (index !== -1) {
@@ -133,11 +135,12 @@ export class MyKitchenComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    //console.log("::event.option::", event);
+   //console.log("::event.option::", event);
+    if(!event || !event.option || !event.option.value) return;
     this.selectedMaterials.push(event.option.value);
     this.materialInput.nativeElement.value = '';
     this.matsCtrl.setValue('');
-    //console.log("::selectedMAts::", this.selectedMaterials);
+   //console.log("::selectedMAts::", this.selectedMaterials);
   }
 
   private _filter(value: string): any[] {
@@ -150,6 +153,7 @@ export class MyKitchenComponent implements OnInit {
   }
 
   showMaterialNameById(id:number) {
+    if(!id) return;
     return this.materialOptions.filter(material => material.id === id)[0].name;
   }
 

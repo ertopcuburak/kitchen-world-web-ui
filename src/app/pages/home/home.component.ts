@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     }
     this.loading=false;
     document.querySelector('.mat-sidenav-content')!.scrollTop = 0;
-    console.log(document.querySelector('#btnMenuTrigger'));
+   //console.log(document.querySelector('#btnMenuTrigger'));
   }
 
   getRecipesError() {
