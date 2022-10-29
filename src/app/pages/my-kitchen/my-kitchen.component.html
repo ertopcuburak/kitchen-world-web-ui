@@ -82,9 +82,9 @@
                 <mat-card-header>
                     <mat-card-title>{{recipe.name}}</mat-card-title>
                     <mat-card-subtitle>{{recipe.recipeOwner.firstName + ' ' + recipe.recipeOwner.lastName}}</mat-card-subtitle>
-                    <img mat-card-avatar src="{{recipe.imageUrl}}" class="recipe-avatar">
+                    <img mat-card-avatar src="{{recipe.imageUrl.startsWith('/') ? apiUrlConst+recipe.imageUrl : recipe.imageUrl}}" class="recipe-avatar">
                 </mat-card-header>
-                <img mat-card-image src="{{recipe.imageUrl}}">
+                <img mat-card-image src="{{recipe.imageUrl.startsWith('/') ? apiUrlConst+recipe.imageUrl : recipe.imageUrl}}">
                 <mat-card-content>
                     <div class="container-fluid p-0">
                         <div class="row p-0">

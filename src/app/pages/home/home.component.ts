@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   loading:boolean = true;
   favRecipe:any;
   showArrows:boolean = false;
+  apiUrlConst = Environment.apiUrl;
 
   constructor(private http:HttpService, private router:Router, private _snackBar: MatSnackBar) { }
 

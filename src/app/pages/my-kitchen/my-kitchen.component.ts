@@ -30,6 +30,7 @@ export class MyKitchenComponent implements OnInit {
   favorites:any[] = [];
   loading:boolean = true;
   favRecipe:any;
+  apiUrlConst = Environment.apiUrl;
   
   @ViewChild('materialInput')
   materialInput!: ElementRef<HTMLInputElement>;

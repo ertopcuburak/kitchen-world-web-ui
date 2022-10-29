@@ -65,6 +65,7 @@ export class AddRecipeComponent implements OnInit {
     ],
     uploadUrl: 'assets/image',
   };
+  recipeImg: any;
 
   constructor(private http:HttpService) { }
 
@@ -148,7 +149,16 @@ export class AddRecipeComponent implements OnInit {
     this.materialList.push({});
   }
 
+  onFileChanged(event:any) {
+    console.log("::onFileChanged::",event);
+    const file = event.target.files[0];
+    console.log("::onFileChanged file::",file);
+    this.recipeImg = file;
+    console.log("::onFileChanged recipeImg::",this.recipeImg);
+  }
+
   saveRecipe(data:any) {
+    console.log("::recipeImg::", this.recipeImg);
     const url = Environment.apiUrl+'/recipes/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
@@ -156,11 +166,11 @@ export class AddRecipeComponent implements OnInit {
     ////console.log("::loggedinUser::", loggedinUser);
     const userId:number | undefined = loggedinUser ? loggedinUser.id : undefined;
     ////console.log("::userId::", userId);
-    if(!data.name || !data.desc || !this.howToMake || !userId || !this.materialList || !this.categoryId || !data.imgUrl) {
+    if(!data.name || !data.desc || !this.howToMake || !userId || !this.materialList || !this.categoryId) {
       Swal.fire("Hata!", "Lütfen tüm alanları doldurun!", "error");
       return;
     }
-    const queryParams = {
+    const recipe = {
       "name":data.name, 
       "description":data.desc,
       "howToMake":this.howToMake,
@@ -171,7 +181,12 @@ export class AddRecipeComponent implements OnInit {
       "createdDate":todayStr,
       "updatedDate":null
     };
-    this.http.post(url, queryParams).subscribe({
+    
+    const queryParams = new FormData();
+    queryParams.append('recipe', JSON.stringify(recipe));
+    queryParams.append('image', this.recipeImg, this.recipeImg.name);
+
+    this.http.post(url, queryParams, true).subscribe({
       next: this.addSuccess.bind(this),
       error: this.addError.bind(this)
     });

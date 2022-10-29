@@ -14,6 +14,7 @@ export class MyFavoritesComponent implements OnInit {
   recipes:any[] = [];
   loggedinUser:any;
   loading:boolean = true;
+  apiUrlConst = Environment.apiUrl;
 
   constructor(private http:HttpService, private _snackBar:MatSnackBar) { }
 

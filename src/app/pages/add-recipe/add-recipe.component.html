@@ -30,9 +30,15 @@
                             </ng-select>
                         </div>
                         <div class="form-group">
-                            <label for="imgUrl">Resim Linki : </label>
-                            <input type="text" name="imgUrl" class="form-control" placeholder="Resim Linki"
-                                [(ngModel)]="recipeData.imgUrl">
+                            <!-- <label for="imgUrl">Tarif Fotoğrafı : </label> -->
+                            <!-- <input type="text" name="imgUrl" class="form-control" placeholder="Resim Linki"
+                                [(ngModel)]="recipeData.imgUrl"> -->
+                                <input
+                                style="display: none"
+                                type="file" (change)="onFileChanged($event)"
+                                #fileInput>
+                              <button class="btn btn-my" (click)="fileInput.click()">Fotoğraf Seç</button>
+                              <span *ngIf="recipeImg">{{recipeImg.name}}</span>
                         </div>
                         <div class="form-group">
                             <label for="howToMake">Yapılışı : </label>
