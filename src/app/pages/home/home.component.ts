@@ -172,12 +172,46 @@ export class HomeComponent implements OnInit {
   addToFavoritesSuccess(data:any) {
     this.favRecipe["isFav"] = true;
     this.favRecipe.favCount += 1;
+    this.sendFavNotif();
     this._snackBar.open("Tarif Favorilerinize Eklendi!", "Kapat", {duration:5000});
   }
 
   addToFavoritesError() {
     this.favRecipe = undefined;
     this._snackBar.open("Bu tarifi daha önce favorilerinize eklediniz!", "Kapat", {duration:5000});
+  }
+
+  sendFavNotif() {
+    if(!this.favRecipe)
+      return;
+    const triggerUser = this.loggedinUser.id;
+    const triggerName = this.loggedinUser.firstName + ' ' + this.loggedinUser.lastName;
+    const message = triggerName + ' "' + this.favRecipe.name + '" tarifinizi favorilere ekledi!'; 
+    const todayStr = new Date().toISOString();
+    const url = Environment.apiUrl + '/notifications/';
+    const queryParams = {
+      "userId":this.favRecipe.userId,
+      "type":"NEW_FAV",
+      "objectId": this.favRecipe.id,
+      "message": message,
+      "isRead": 0,
+      "triggerUser": triggerUser,
+      "originSystem": 0,
+      "createdTime":todayStr
+    };
+    this.http.post(url, queryParams).subscribe({
+      next: this.sendFavNotifSuccess.bind(this),
+      error: this.sendFavNotifError.bind(this)
+    });
+  }
+
+  sendFavNotifSuccess(data:any) {
+    console.log("::fav_notif sent!::");
+    //this._snackBar.open("Tarif Favorilerinize Eklendi!", "Kapat", {duration:5000});
+  }
+
+  sendFavNotifError() {
+  
   }
 
   getAllFavsOfLoggedinUser() {
