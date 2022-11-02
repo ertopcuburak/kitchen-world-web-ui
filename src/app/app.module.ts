@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import {PlatformModule} from '@angular/cdk/platform';
 import {MatBadgeModule} from '@angular/material/badge';
 import {HttpClientModule} from '@angular/common/http';
+import { AppConfigService } from './services/app-config.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,14 @@ import {HttpClientModule} from '@angular/common/http';
     MatBadgeModule,
     HttpClientModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, 
+    { 
+      provide : APP_INITIALIZER, 
+      multi : true, 
+       deps : [AppConfigService], 
+       useFactory : (appConfigService : AppConfigService) =>  () => appConfigService.loadAppConfig()
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

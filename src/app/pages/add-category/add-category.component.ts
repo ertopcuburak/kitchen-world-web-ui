@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AppConfigService } from 'src/app/services/app-config.service';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
@@ -13,7 +14,7 @@ export class AddCategoryComponent implements OnInit {
  
   categoryData:any = {};
 
-  constructor(private http:HttpService) { }
+  constructor(private http:HttpService, private appConfig:AppConfigService) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +24,7 @@ export class AddCategoryComponent implements OnInit {
       Swal.fire("Hata!", "Lütfen tüm alanları doldurun!", "error");
       return;
     }
-    const url = Environment.apiUrl+'/categories/';
+    const url = this.appConfig.apiUrl+'/categories/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
     const queryParams = {

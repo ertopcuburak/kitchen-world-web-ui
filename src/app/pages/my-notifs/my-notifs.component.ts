@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppConfigService } from 'src/app/services/app-config.service';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 
@@ -13,7 +14,7 @@ export class MyNotifsComponent implements OnInit {
   loggedinUser:any;
   allNotifs: any[] = [];
 
-  constructor(private http:HttpService, private router:Router) { }
+  constructor(private http:HttpService, private router:Router, private appConfig:AppConfigService) { }
 
   ngOnInit(): void {
     this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
@@ -25,7 +26,7 @@ export class MyNotifsComponent implements OnInit {
       return;
     this.loading = true;
     const todayStr = new Date().toISOString();
-    const url = Environment.apiUrl + '/notifications/all';
+    const url = this.appConfig.apiUrl + '/notifications/all';
     const queryParams = {};
     this.http.post(url, queryParams).subscribe({
       next: this.getAllNotifsOfLoggedinUserSuccess.bind(this),
@@ -47,7 +48,7 @@ export class MyNotifsComponent implements OnInit {
       return;
     this.loading = true;
     const todayStr = new Date().toISOString();
-    const url = Environment.apiUrl + '/notifications/read/'+id;
+    const url = this.appConfig.apiUrl + '/notifications/read/'+id;
     const queryParams = {};
     this.http.post(url, queryParams).subscribe({
       next: this.readNotifSuccess.bind(this),

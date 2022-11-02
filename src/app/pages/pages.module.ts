@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
@@ -33,6 +33,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MyNotifsComponent } from './my-notifs/my-notifs.component';
+import { AppConfigService } from '../services/app-config.service';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,13 @@ import { MyNotifsComponent } from './my-notifs/my-notifs.component';
     MatSnackBarModule,
     MatBadgeModule
   ],
-  providers:[HttpService]
+  providers:[HttpService,
+    { 
+      provide : APP_INITIALIZER, 
+      multi : true, 
+       deps : [AppConfigService], 
+       useFactory : (appConfigService : AppConfigService) =>  () => appConfigService.loadAppConfig()
+    }
+  ]
 })
 export class PagesModule { }

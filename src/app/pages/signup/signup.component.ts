@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AppConfigService } from 'src/app/services/app-config.service';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
@@ -14,7 +15,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 export class SignupComponent implements OnInit {
   userData: any = {};
   isAdmin = 0;
-  constructor(private http: HttpService, private router:Router, private _snackBar: MatSnackBar) { }
+  constructor(private http: HttpService, private router:Router, private _snackBar: MatSnackBar, private appConfig:AppConfigService) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +23,7 @@ export class SignupComponent implements OnInit {
   signUp(data: any) {
     if (this.userData.uName && this.userData.firstName && this.userData.lastName && this.userData.email && this.userData.password && this.userData.c_password && this.userData.password === this.userData.c_password) {
       //console.log("::signupData::", this.userData);
-      const url = Environment.apiUrl + '/users/signup';
+      const url = this.appConfig.apiUrl + '/users/signup';
       const todayStr = new Date().toISOString();
       const md5 = new Md5();
       //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');

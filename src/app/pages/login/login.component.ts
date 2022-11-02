@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppConfigService } from 'src/app/services/app-config.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
 import {Md5} from 'ts-md5/dist/md5';
@@ -23,14 +24,14 @@ export class LoginComponent implements OnInit {
   userData:any = {};
   sid:string|undefined;
 
-  constructor(private http:HttpClient, private router:Router, private _snackBar: MatSnackBar) { }
+  constructor(private http:HttpClient, private router:Router, private _snackBar: MatSnackBar, private appConfig:AppConfigService) { }
 
   ngOnInit(): void {
   }
 
   submit(data:any) {
     if (data && data.identifier && data.password) {
-      const url = Environment.apiUrl + '/users/login';
+      const url = this.appConfig.apiUrl + '/users/login';
       const md5 = new Md5();
       this.sid = md5.appendStr(data.password).end().toString();
       const queryParams = {

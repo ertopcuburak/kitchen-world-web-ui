@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Observable } from 'rxjs';
+import { AppConfigService } from 'src/app/services/app-config.service';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import Swal from 'sweetalert2';
@@ -67,7 +68,7 @@ export class AddRecipeComponent implements OnInit {
   };
   recipeImg: any;
 
-  constructor(private http:HttpService) { }
+  constructor(private http:HttpService, private appConfig:AppConfigService) { }
 
   ngOnInit(): void {
     this.getCategories();
@@ -75,7 +76,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   getCategories() {
-    const url = Environment.apiUrl + '/categories/all';
+    const url = this.appConfig.apiUrl + '/categories/all';
     this.http.post(url, {}).subscribe({
       next: this.getCategoriesSuccess.bind(this),
       error: this.getCategoriesError.bind(this)
@@ -83,7 +84,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   getMaterials() {
-    const url = Environment.apiUrl + '/materials/all';
+    const url = this.appConfig.apiUrl + '/materials/all';
     this.http.post(url, {}).subscribe({
       next: this.getMaterialsSuccess.bind(this),
       error: this.getMaterialsError.bind(this)
@@ -159,7 +160,7 @@ export class AddRecipeComponent implements OnInit {
 
   saveRecipe(data:any) {
    //console.log("::recipeImg::", this.recipeImg);
-    const url = Environment.apiUrl+'/recipes/';
+    const url = this.appConfig.apiUrl+'/recipes/';
     const todayStr = new Date().toISOString();
     //const todayStr =  [d.getFullYear(), (d.getMonth() + 1) < 10 ? '0'+ (d.getMonth() + 1) : (d.getMonth() + 1), d.getDate() < 10 ? '0' + d.getDate() : d.getDate()].join('-') + 'T' + [d.getHours() < 10 ? '0'+d.getHours() : d.getHours(),d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes(),d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds()].join(':');
     const loggedinUser:any = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));

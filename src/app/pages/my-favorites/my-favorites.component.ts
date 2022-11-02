@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppConfigService } from 'src/app/services/app-config.service';
 import { HttpService } from 'src/app/services/http-service.service';
 import { Environment } from 'src/app/utils/environment';
 import { Slugify } from 'src/app/utils/slugify';
@@ -14,9 +15,9 @@ export class MyFavoritesComponent implements OnInit {
   recipes:any[] = [];
   loggedinUser:any;
   loading:boolean = true;
-  apiUrlConst = Environment.apiUrl;
+  //apiUrlConst = Environment.apiUrl;
 
-  constructor(private http:HttpService, private _snackBar:MatSnackBar) { }
+  constructor(private http:HttpService, private _snackBar:MatSnackBar, public appConfig:AppConfigService) { }
 
   ngOnInit(): void {
     this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
@@ -28,7 +29,7 @@ export class MyFavoritesComponent implements OnInit {
     this.recipes = [];
     if(!this.loggedinUser)
       return;
-    const url = Environment.apiUrl + '/recipes/getFavorites/';
+    const url = this.appConfig.apiUrl + '/recipes/getFavorites/';
     const queryParams = {
       "userId":this.loggedinUser.id
     };
@@ -66,7 +67,7 @@ export class MyFavoritesComponent implements OnInit {
     }
     this.loading = true;
     this.recipes = [];
-    const url = Environment.apiUrl + '/favorites/deleteFav';
+    const url = this.appConfig.apiUrl + '/favorites/deleteFav';
     const queryParams = {
       "userId":this.loggedinUser.id,
       "recipeId":recipe.id

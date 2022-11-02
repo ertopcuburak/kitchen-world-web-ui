@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { Slugify } from 'src/app/utils/slugify';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppConfigService } from 'src/app/services/app-config.service';
 
 @Component({
   selector: 'app-my-kitchen',
@@ -30,13 +31,13 @@ export class MyKitchenComponent implements OnInit {
   favorites:any[] = [];
   loading:boolean = true;
   favRecipe:any;
-  apiUrlConst = Environment.apiUrl;
+  //apiUrlConst = Environment.apiUrl;
   
   @ViewChild('materialInput')
   materialInput!: ElementRef<HTMLInputElement>;
   isSearchPressed: boolean = false;
 
-  constructor(private http:HttpService, private _snackBar: MatSnackBar) {
+  constructor(private http:HttpService, private _snackBar: MatSnackBar, public appConfig:AppConfigService) {
     this.filteredMaterials = this.matsCtrl.valueChanges.pipe(
       startWith(null),
       map((material: string | null) => (material ? this._filter(material) : this.materialOptions.slice())),
@@ -51,7 +52,7 @@ export class MyKitchenComponent implements OnInit {
 
   getMaterials() {
     this.loading = true;
-    const url = Environment.apiUrl + '/materials/all';
+    const url = this.appConfig.apiUrl + '/materials/all';
     this.http.post(url, {}).subscribe({
       next: this.getMaterialsSuccess.bind(this),
       error: this.getMaterialsError.bind(this)
@@ -78,7 +79,7 @@ export class MyKitchenComponent implements OnInit {
       this.loading = false;
       return;
     }
-    const url = Environment.apiUrl + '/recipes/searchByMaterials';
+    const url = this.appConfig.apiUrl + '/recipes/searchByMaterials';
     const queryParams = {
       "materials":materials
     };
@@ -186,7 +187,7 @@ export class MyKitchenComponent implements OnInit {
     if(!this.loggedinUser && !this.recipes)
       return;
     const todayStr = new Date().toISOString();
-    const url = Environment.apiUrl + '/favorites/getFavsByUser';
+    const url = this.appConfig.apiUrl + '/favorites/getFavsByUser';
     const queryParams = {
       "userId":this.loggedinUser.id,
     };
@@ -209,7 +210,7 @@ export class MyKitchenComponent implements OnInit {
       return;
     this.favRecipe = recipe;
     const todayStr = new Date().toISOString();
-    const url = Environment.apiUrl + '/favorites/';
+    const url = this.appConfig.apiUrl + '/favorites/';
     const queryParams = {
       "userId":this.loggedinUser.id,
       "recipeId":recipe.id,
