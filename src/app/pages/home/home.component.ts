@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     if(localStorage.getItem('uname') && localStorage.getItem('sid')) {
       this.loggedinUser = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('loggedinUser'))));
       this.getUnreadNotifsOfLoggedinUser();
-      this.router.navigateByUrl('/pages/home');
     }
   }
 
