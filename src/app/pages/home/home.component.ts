@@ -182,7 +182,7 @@ export class HomeComponent implements OnInit {
   }
 
   sendFavNotif() {
-    if(!this.favRecipe)
+    if(!this.favRecipe || !this.loggedinUser || this.favRecipe.userId === this.loggedinUser.id)
       return;
     const triggerUser = this.loggedinUser.id;
     const triggerName = this.loggedinUser.firstName + ' ' + this.loggedinUser.lastName;
