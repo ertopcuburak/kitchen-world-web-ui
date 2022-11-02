@@ -11,7 +11,6 @@ export class AppConfigService {
   
   constructor(http: HttpClient) {
     this.http = http;
-    this.loadAppConfig();
   }
 
   loadAppConfig() {
@@ -21,14 +20,6 @@ export class AppConfigService {
   }
 
   get apiUrl() : string {
-    if(!this.appConfig) {
-      this.http.get('/assets/app-settings.json').subscribe(config => {
-        this.appConfig = config;
-        return this.appConfig;
-      });
-    } else {
-      return this.appConfig.apiUrl;
-    }
     return this.appConfig.apiUrl;
   }
 }
