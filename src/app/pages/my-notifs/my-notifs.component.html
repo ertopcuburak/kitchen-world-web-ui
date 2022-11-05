@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div *ngIf="!loading" class="row p-2 mt-4">
+    <div *ngIf="!loading && allNotifs && allNotifs.length > 0" class="row p-2 mt-4">
         <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
             <div *ngFor="let notif of allNotifs" class="card mt-4">
                 <div class="card-body notif-card">
@@ -32,14 +32,14 @@
                                         <mat-chip *ngIf="notif.isRead === 0" class="brown-chip" (click)="readNotif(notif.id)">
                                             Yeni
                                         </mat-chip>
-                                    </mat-chip-list>                                    
+                                    </mat-chip-list>
                                 </div>
                                 <div class="col">
                                     {{notif.createdTime | date:'dd.MM.YYYY HH:mm':'tr'}}
                                 </div>
                             </div>
                             <div class="row p-0 mt-2">
-                                <div class="col">                                    
+                                <div class="col">
                                     <button *ngIf="notif.triggerUser && notif.triggerUser > 0" mat-mini-fab class="avatar right-mar">
                                         {{notif.triggerUserObj['firstName'][0] + notif.triggerUserObj['lastName'][0]}}
                                     </button>
@@ -48,11 +48,22 @@
                             </div>
                         </div>
                         <!-- <button *ngIf="notif.isRead === 0" mat-button color="accent">Yeni:</button> -->
-                        
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div *ngIf="!loading && (!allNotifs || allNotifs.length === 0)" class="row p-2 mt-4">
+      <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+        <div class="card mt-4">
+          <div class="card-body notif-card">
+            <i>Henüz bir bildiriminiz yok.</i>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 </div>
