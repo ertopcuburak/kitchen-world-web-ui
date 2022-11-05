@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:open": "ng serve -o",
     "build": "ng build",
-    "build:dev": "ng build --watch --deploy-url /kw/ --base-href /kw/",
+    "build:dev": "ng build --watch --deploy-url / --base-href /",
     "build:prod": "ng build --aot  --deploy-url / --base-href / --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
