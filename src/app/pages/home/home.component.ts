@@ -180,11 +180,13 @@ export class HomeComponent implements OnInit {
   }
 
   searchEcommerce(keyword:string, ecommerceBrand:string){
+    //sr?q=SOSİS&qt=SOSİS&st=SOSİS&os=1
+    //window.open(Environment.trendyolSearchUrl+keyword+'&qt='+keyword+'&st='+keyword+'&os=1', '_blank');
     keyword = Slugify.slugifyText(keyword);
     if(ecommerceBrand === 'migros') {
       window.open(Environment.migrosSearchUrl+keyword, '_blank');
     } else if(ecommerceBrand === 'trendyol') {
-      window.open(Environment.trendyolSearchUrl+keyword, '_blank');
+      window.open(Environment.trendyolSearchUrl+keyword+'&qt='+keyword+'&st='+keyword+'&os=1', '_blank');
     } else if(ecommerceBrand === 'istegelsin') {
       window.open(Environment.isteGelsinSearchUrl+keyword, '_blank');
     }

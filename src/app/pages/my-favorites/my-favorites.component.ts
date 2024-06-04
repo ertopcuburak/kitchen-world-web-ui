@@ -54,7 +54,7 @@ export class MyFavoritesComponent implements OnInit {
     if(ecommerceBrand === 'migros') {
       window.open(Environment.migrosSearchUrl+keyword, '_blank');
     } else if(ecommerceBrand === 'trendyol') {
-      window.open(Environment.trendyolSearchUrl+keyword, '_blank');
+      window.open(Environment.trendyolSearchUrl+keyword+'&qt='+keyword+'&st='+keyword+'&os=1', '_blank');
     } else if(ecommerceBrand === 'istegelsin') {
       window.open(Environment.isteGelsinSearchUrl+keyword, '_blank');
     }
